@@ -1,7 +1,7 @@
 {
   "name": "artisto",
   "version": "0.1.0",
-  "homepage": "https://pecheri.github.io/artisto",
+  "homepage": "http://pecheri.github.io/artisto",
   "private": true,
   "dependencies": {
     "@craco/craco": "^6.2.0",
