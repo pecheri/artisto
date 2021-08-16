@@ -1,27 +1,36 @@
-import React from 'react';
+import React, { lazy, Suspense } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import * as ROUTES from './constants/routes';
-import Login from './pages/Login';
-import SignUp from './pages/SignUp';
-import DashBoard from './pages/DashBoard';
-import Profile from './pages/Profile';
-import ProfileEdit from './pages/ProfileEdit';
-import Search from './pages/Search';
-import NotFound from './pages/NotFound';
+import UserContext from './context/user';
+import useAuthListener from './hooks/useAuthListener';
+
+const Login = lazy(() => import('./pages/Login'));
+const SignUp = lazy(() => import('./pages/SignUp'));
+const DashBoard = lazy(() => import('./pages/DashBoard'));
+const Profile = lazy(() => import('./pages/Profile'));
+const ProfileEdit = lazy(() => import('./pages/ProfileEdit'));
+const Search = lazy(() => import('./pages/Search'));
+const NotFound = lazy(() => import('./pages/NotFound'));
 
 function App() {
+    const { user } = useAuthListener();
+
     return (
-        <Router>
-            <Switch>
-                <Route path={ROUTES.LOGIN} component={Login} />
-                <Route path={ROUTES.SIGN_UP} component={SignUp} />
-                <Route path={ROUTES.DASHBOARD} component={DashBoard} />
-                <Route path={ROUTES.PROFILE} component={Profile} />
-                <Route path={ROUTES.PROFILE_EDIT} component={ProfileEdit} />
-                <Route path={ROUTES.SEARCH} component={Search} />
-                <Route path={ROUTES.NOT_FOUND} component={NotFound} />
-            </Switch>
-        </Router>
+        <UserContext.Provider value={{ user }}>
+            <Router>
+                <Suspense fallback={<p>Loading...</p>}>
+                    <Switch>
+                        <Route path={ROUTES.LOGIN} component={Login} />
+                        <Route path={ROUTES.SIGN_UP} component={SignUp} />
+                        <Route path={ROUTES.DASHBOARD} component={DashBoard} exact />
+                        <Route path={ROUTES.PROFILE} component={Profile} />
+                        <Route path={ROUTES.PROFILE_EDIT} component={ProfileEdit} />
+                        <Route path={ROUTES.SEARCH} component={Search} />
+                        <Route path={ROUTES.NOT_FOUND} component={NotFound} />
+                    </Switch>
+                </Suspense>
+            </Router>
+        </UserContext.Provider>
     );
 }
 

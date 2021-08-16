@@ -2,6 +2,7 @@ import React, { useContext, useState, useEffect } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import * as ROUTES from '../constants/routes';
 import FirebaseContext from '../context/firebase';
+import logo from '../images/logo.png';
 
 export default function Login() {
     const { firebase } = useContext(FirebaseContext);
@@ -32,7 +33,7 @@ export default function Login() {
         <div className="flex justify-center container max-w-screen-md items-center h-screen mx-auto">
             <div className="w-1/2">
                 <h1 className="w-full flex items-center justify-end">
-                    <img src="/images/logo.png" alt="artisto" className="" />
+                    <img src={logo} alt="artisto" className="" />
                 </h1>
             </div>
             <div className="w-1/2">
@@ -51,7 +52,7 @@ export default function Login() {
                             <p className="text-gray-light text-sm mt-8">Password</p>
                             <input
                                 placeholder="Enter Password"
-                                type="text"
+                                type="password"
                                 onChange={({ target }) => setPassword(target.value)}
                                 value={password}
                                 className="bg-gray-light w-full p-1 h-10 text-sm"
