@@ -5,7 +5,11 @@ module.exports = {
         fill: (theme) => ({
             red: theme('colors.red.primary'),
         }),
-        extend: {},
+        extend: {
+            zIndex: {
+                90: '90',
+            },
+        },
         fontFamily: {
             body: ['Poppins', 'sans-serif'],
         },

@@ -8,23 +8,6 @@ import usePhotos from '../hooks/usePhotos';
 
 export default function Timeline() {
     const { user } = useContext(UserContext);
-    // const { photos } = usePhotos();
-    // console.log('photos', photos);
-    // const [timelinePhotos, setTimelinePhotos] = useState(null);
-
-    // useEffect(() => {
-    //     const getTimelinePhotos = async () => {
-    //         const [userInfo] = await getUserByUserId(user.uid);
-    //         const { following } = userInfo;
-    //         const result = await getFollowingPhotosByUserId(following, user.uid);
-    //         setTimelinePhotos(result);
-    //         console.log('result', result);
-    //     };
-    //     if (user?.uid) {
-    //         getTimelinePhotos();
-    //     }
-    // }, [user]);
-
     const { photos } = usePhotos();
 
     console.log('photos', photos);

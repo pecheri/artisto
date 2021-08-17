@@ -18,7 +18,7 @@ function App() {
     return (
         <UserContext.Provider value={{ user }}>
             <Router>
-                <Suspense fallback={<p>Loading...</p>}>
+                <Suspense fallback={<p className="text-gray-light text-center w-screen text-xl">Loading...</p>}>
                     <Switch>
                         <Route path={ROUTES.LOGIN} component={Login} />
                         <Route path={ROUTES.SIGN_UP} component={SignUp} />
@@ -26,7 +26,7 @@ function App() {
                         <Route path={ROUTES.PROFILE} component={Profile} />
                         <Route path={ROUTES.PROFILE_EDIT} component={ProfileEdit} />
                         <Route path={ROUTES.SEARCH} component={Search} />
-                        <Route path={ROUTES.NOT_FOUND} component={NotFound} />
+                        <Route component={NotFound} />
                     </Switch>
                 </Suspense>
             </Router>
