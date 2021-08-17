@@ -1,0 +1,1 @@
+{"version":3,"sources":["pages/Search.js"],"names":["Search"],"mappings":"oGAAA,gEAEe,SAASA,IACpB,OAAO","file":"static/js/10.9c1a92c2.chunk.js","sourcesContent":["import React from 'react';\n\nexport default function Search() {\n    return <div>I am search</div>;\n}\n"],"sourceRoot":""}
