@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import Header from '../components/Header';
 import { getUserByUsername } from '../services/firebase';
-import UserProfile from '../components/profile';
+import UserProfile from '../components/profile/';
 import { useHistory } from 'react-router-dom';
 import * as ROUTES from '../constants/routes';
 import Skeleton, { SkeletonTheme } from 'react-loading-skeleton';

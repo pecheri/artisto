@@ -13,8 +13,10 @@ export default function ProfileEdit() {
     const [userBio, setUserBio] = useState(bio);
     const [userCategory, setUserCategory] = useState(category);
     const [userFullName, setUserFullName] = useState(fullName);
-    const [userPhoto, setUserPhoto] = useState(photo);
     const [userTitle, setUserTitle] = useState(title);
+    const [imageFile, setImageFile] = useState(null);
+
+    console.log('imageFile', imageFile);
 
     const history = useHistory();
 
@@ -23,18 +25,17 @@ export default function ProfileEdit() {
             setUserBio(bio);
             setUserCategory(category);
             setUserFullName(fullName);
-            setUserPhoto(photo);
+            // setUserPhoto(photo);
             setUserTitle(title);
         }
     }, [userId]);
 
-    const isInvalid = userBio === bio && userCategory === category && userFullName === fullName && userTitle === title;
-
-    console.log('isInvalid', isInvalid);
+    const isInvalid =
+        userBio === bio && userCategory === category && userFullName === fullName && userTitle === title && !imageFile;
 
     const handleProfileUpdate = async (event) => {
         event.preventDefault();
-        await updateProfile(docId, userFullName, userCategory, userTitle, userBio);
+        await updateProfile(docId, userFullName, userCategory, userTitle, userBio, imageFile);
         alert('Your Profile was successfully update!');
         const timer = setTimeout(() => {
             history.push(`/p/${username}`);
@@ -61,7 +62,7 @@ export default function ProfileEdit() {
                         <div className="grid grid-cols-4 mt-8 items-center">
                             <p className="text-gray-light text-sm text-center">Category</p>
                             <select
-                                className="bg-gray-light w-full h-10 text-sm col-span-3"
+                                className="bg-gray-light w-full h-10 text-sm col-span-3 capitalize"
                                 onChange={({ target }) => setUserCategory(target.value)}
                                 value={userCategory}
                             >
@@ -91,6 +92,15 @@ export default function ProfileEdit() {
                                 onChange={({ target }) => setUserBio(target.value)}
                                 value={userBio}
                                 className="bg-gray-light w-full p-1 text-sm col-span-3 h-28"
+                            />
+                        </div>
+                        <div className="grid grid-cols-4 mt-8 items-center">
+                            <p className="text-gray-light text-sm text-center">Profile Photo</p>
+                            <input
+                                type="file"
+                                accept="image/*"
+                                className="text-gray-light w-full p-1 h-10 text-sm col-span-3"
+                                onChange={({ target }) => setImageFile(target.files)}
                             />
                         </div>
                         <div className="grid grid-cols-4 mt-8 items-center">

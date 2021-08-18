@@ -16,7 +16,6 @@ export default function ProfileHeader({ profileUserInfo, photos, photoCounts }) 
     const [isUserFollowing, setIsUserFollowing] = useState(null);
     const [followersCount, setFollowersCount] = useState(profileUserInfo.followers.length);
     const [followingOrFollowers, setFollowingOrFollowers] = useState(null);
-    console.log('followingOrFOllowers', followingOrFollowers);
 
     const history = useHistory();
 
@@ -100,13 +99,16 @@ export default function ProfileHeader({ profileUserInfo, photos, photoCounts }) 
                     </p>
                     <div className="flex mt-4">
                         <p>
-                            {photoCounts} <span className="text-sm">posts</span>
+                            {photoCounts} <span className="text-sm">{photoCounts === 1 ? 'post' : 'posts'}</span>
                         </p>
                         <p
                             className="px-4 cursor-pointer"
                             onClick={() => setFollowingOrFollowers(profileUserInfo.followers.length > 0 && 'followers')}
                         >
-                            {followersCount} <span className="text-sm">followers</span>
+                            {followersCount}{' '}
+                            <span className="text-sm">
+                                {profileUserInfo.followers.length === 1 ? 'follower' : 'followers'}
+                            </span>
                         </p>
                         <p
                             className="cursor-pointer"

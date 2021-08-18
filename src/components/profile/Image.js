@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import Post from '../post';
+import ImageDetails from './ImageDetails';
 
 export default function Image({ photo }) {
     const [isImageClicked, setIsImageClicked] = useState(false);
@@ -31,7 +31,7 @@ export default function Image({ photo }) {
                     className="flex justify-center w-screen pt-20 bg-gray-primary bg-opacity-50 absolute top-0 left-0 z-90"
                 >
                     <div className="w-full max-w-screen-sm pb-8">
-                        <Post photo={photo} />
+                        <ImageDetails photo={photo} />
                     </div>
                 </div>
             )}
