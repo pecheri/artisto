@@ -1,14 +1,39 @@
-import React, { useEffect, useState, useContext } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import Skeleton, { SkeletonTheme } from 'react-loading-skeleton';
-import useUser from '../hooks/useUser';
-import { getFollowingPhotosByUserId, getUserByUserId } from '../services/firebase';
-import UserContext from '../context/user';
 import Post from './post';
-import usePhotos from '../hooks/usePhotos';
+import UserContext from '../context/user';
+import { getUserByUserId, getFollowingPhotosByUserId } from '../services/firebase';
 
 export default function Timeline() {
-    const { user } = useContext(UserContext);
-    const { photos } = usePhotos();
+    const [photos, setPhotos] = useState(null);
+
+    const {
+        user: { uid: userId },
+    } = useContext(UserContext);
+
+    useEffect(() => {
+        async function getTimelinePhotos() {
+            let result = null;
+            while (!result) {
+                [result] = await getUserByUserId(userId);
+            }
+
+            let followedUserPhotos = [];
+
+            // does the user actually follow people?
+            if (result.following.length > 0) {
+                followedUserPhotos = await getFollowingPhotosByUserId(result.following, userId);
+            } else {
+                null;
+            }
+            // re-arrange array to be newest photos first by dateCreated
+            followedUserPhotos.sort((a, b) => b.dateCreated - a.dateCreated);
+            setPhotos(followedUserPhotos);
+        }
+        if (userId) {
+            getTimelinePhotos();
+        }
+    }, [userId]);
 
     return (
         <div className="col-span-2 container">
@@ -19,7 +44,7 @@ export default function Timeline() {
             ) : photos.length > 0 ? (
                 photos.map((photo) => <Post key={photo.docId} photo={photo} />)
             ) : (
-                <p>Follow artists to see photos!</p>
+                <p className="text-gray-light text-center pt-20">Follow artists to see photos!</p>
             )}
         </div>
     );

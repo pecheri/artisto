@@ -8,10 +8,10 @@ export default function UploadImage() {
     const [image, setImage] = useState(null);
     const [imageForUpload, setImageForUpload] = useState(null);
     const [caption, setCaption] = useState('');
+    const [upload, setUpload] = useState(false);
     const history = useHistory();
 
-    console.log('image', image);
-    console.log('imageForUpload', imageForUpload);
+    console.log('upload', upload);
 
     const {
         userInfo: { userId, username },
@@ -26,11 +26,8 @@ export default function UploadImage() {
 
     const postSubmit = async (event) => {
         event.preventDefault();
-        await uploadNewPost(caption, imageForUpload, userId);
-        alert('Your post was successfully uploaded!');
-        const timer = setTimeout(() => {
-            history.push(`/p/${username}`);
-        }, 500);
+        await uploadNewPost(caption, imageForUpload, userId, setUpload);
+        history.push(`/p/${username}`);
     };
 
     const isInvalid = !image || !caption;
@@ -43,6 +40,13 @@ export default function UploadImage() {
     return (
         <div>
             <Header />
+            {upload && (
+                <div className="flex absolute top-0 left-0 w-screen h-screen bg-gray-dark opacity-70 z-90 items-center justify-center">
+                    <p className="text-2xl text-gray-light bg-gradient-to-r from-blue-primary via-yellow-primary to-red-primary py-4 px-8 rounded animate-pulse">
+                        Uploading...
+                    </p>
+                </div>
+            )}
             <div className="container max-w-screen-lg mx-auto">
                 <div className="pt-32 flex">
                     <form onSubmit={postSubmit} className="flex w-full max-w-screen-lg mx-auto">

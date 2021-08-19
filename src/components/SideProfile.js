@@ -7,39 +7,47 @@ import useUser from '../hooks/useUser';
 import Skeleton, { SkeletonTheme } from 'react-loading-skeleton';
 
 export default function SideProfile() {
-    // const [userInfo, setUserInfo] = useState({});
-    // const { user } = useContext(UserContext);
-    // useEffect(() => {
-    //     document.title = 'Artisto';
-    // }, []);
+    const [userInfo, setUserInfo] = useState({});
+    const {
+        user: { uid: userId },
+    } = useContext(UserContext);
 
-    // useEffect(() => {
-    //     const getUserInfo = async () => {
-    //         const [result] = await getUserByUserId(user.uid);
-    //         setUserInfo(result);
-    //         console.log('result', result);
-    //     };
-    //     if (user) {
-    //         getUserInfo();
-    //     }
-    // }, [user]);
+    console.log('userIdSideProfile', userId);
 
-    const { userInfo } = useUser();
+    useEffect(() => {
+        document.title = 'Artisto';
+    }, []);
+
+    useEffect(() => {
+        let result = null;
+        const getUserInfo = async () => {
+            while (!result) {
+                [result] = await getUserByUserId(userId);
+                setUserInfo(result);
+                console.log('resultSideProfile', result);
+            }
+        };
+        if (userId) {
+            getUserInfo();
+        }
+    }, [userId]);
+
+    // const { userInfo } = useUser();
 
     return (
         <SkeletonTheme color="#494848" highlightColor="#F1F1F1">
             <div className="flex pt-4 justify-center">
                 <div className="mx-auto justify-center flex-col w-full sticky top-0 max-h-screen pt-20">
                     <div className="flex justify-center">
-                        <Link to={`/p/${userInfo.username}`}>
-                            {!userInfo.photo ? (
-                                <Skeleton width={144} height={144} circle={true} />
-                            ) : (
+                        {!userInfo?.photo && !userInfo?.username ? (
+                            <Skeleton width={144} height={144} circle={true} />
+                        ) : (
+                            <Link to={`/p/${userInfo.username}`}>
                                 <img src={userInfo.photo} className="h-36 w-36 rounded-full object-cover" />
-                            )}
-                        </Link>
+                            </Link>
+                        )}
                     </div>
-                    {!userInfo.fullName ? (
+                    {!userInfo?.username ? (
                         <div className="flex justify-center flex-col items-center mt-4">
                             <Skeleton width={180} height={200} />
                         </div>

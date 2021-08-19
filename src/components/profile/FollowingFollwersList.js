@@ -23,7 +23,6 @@ export default function FollowingFollwersList({ following, followers, followingO
             getFollowersList();
         }
     }, [followingOrFollowers]);
-    console.log('list', list);
     return (
         <div className="bg-gray-light h-3/4 max-w-sm w-96 rounded text-gray-dark p-8">
             {list ? (

@@ -7,21 +7,21 @@ import { getUserByUserId } from '../services/firebase';
 import useUser from '../hooks/useUser';
 
 export default function DashBoard() {
-    const [userInfo, setUserInfo] = useState({});
-    const { user } = useContext(UserContext);
-    useEffect(() => {
-        document.title = 'Artisto';
-    }, []);
+    // const [userInfo, setUserInfo] = useState({});
+    // const { user } = useContext(UserContext);
+    // useEffect(() => {
+    //     document.title = 'Artisto';
+    // }, []);
 
-    useEffect(() => {
-        const getUserInfo = async () => {
-            const [result] = await getUserByUserId(user.uid);
-            setUserInfo(result);
-        };
-        if (user) {
-            getUserInfo();
-        }
-    }, [user]);
+    // useEffect(() => {
+    //     const getUserInfo = async () => {
+    //         const [result] = await getUserByUserId(user.uid);
+    //         setUserInfo(result);
+    //     };
+    //     if (user) {
+    //         getUserInfo();
+    //     }
+    // }, [user]);
 
     return (
         <div className="font-body">

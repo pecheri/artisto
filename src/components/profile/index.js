@@ -11,7 +11,7 @@ export default function UserProfile({ profileUserInfo }) {
     useEffect(() => {
         const getProfileUserPhotos = async () => {
             const result = await getPhotosbyUserId(profileUserInfo.userId);
-            setPhotos(result);
+            setPhotos(result.sort((a, b) => b.dateCreated - a.dateCreated));
             setPhotoCounts(result.length);
         };
         if (profileUserInfo?.userId) {
@@ -22,11 +22,11 @@ export default function UserProfile({ profileUserInfo }) {
     return (
         <div className="max-w-screen-lg container mx-auto px-4">
             <ProfileHeader profileUserInfo={profileUserInfo} photos={photos} photoCounts={photoCounts} />
-            {photos ? (
+            {!photos ? null : photos.length > 0 ? (
                 <Images profileUserInfo={profileUserInfo} photos={photos} />
             ) : (
                 <div className="mt-8 border-t-2 border-gray-dark">
-                    <p className="text-gray-light text-center pt-8">No Photos</p>
+                    <p className="text-gray-light text-center pt-8">No Posts</p>
                 </div>
             )}
         </div>

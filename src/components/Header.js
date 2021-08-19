@@ -1,16 +1,17 @@
 import React, { useContext, useEffect, useState } from 'react';
-import PropTypes from 'prop-types';
 import logo from '../images/logo.png';
 import { Link, useHistory } from 'react-router-dom';
 import * as ROUTES from '../constants/routes';
 import UserContext from '../context/user';
 import FirebaseContext from '../context/firebase';
 import { getUserByUserId } from '../services/firebase';
-import useUser from '../hooks/useUser';
 
 export default function Header() {
-    // const [userInfo, setUserInfo] = useState('');
-    const { user } = useContext(UserContext);
+    const [userInfo, setUserInfo] = useState('');
+    const {
+        user: { uid: userId },
+    } = useContext(UserContext);
+
     const { firebase } = useContext(FirebaseContext);
     const history = useHistory();
     const handleSignOut = () => {
@@ -18,19 +19,20 @@ export default function Header() {
         history.push(ROUTES.LOGIN);
     };
 
-    const { userInfo } = useUser();
+    useEffect(() => {
+        let result = null;
+        const getUserInfo = async () => {
+            while (!result) {
+                [result] = await getUserByUserId(userId);
+                setUserInfo(result);
+            }
+        };
+        if (userId) {
+            getUserInfo();
+        }
+    }, [userId]);
 
-    // useEffect(() => {
-    //     const getUserInfo = async () => {
-    //         const [result] = await getUserByUserId(user.uid);
-    //         setUserInfo(result);
-    //     };
-    //     if (user?.uid) {
-    //         getUserInfo();
-    //     }
-    // }, [user]);
-
-    return (
+    return userInfo ? (
         <div className="bg-gray-dark w-screen h-14 flex justify-center items-center fixed z-50">
             <div className="max-w-screen-xl w-screen h-14 flex justify-between items-center">
                 <Link to={ROUTES.DASHBOARD}>
@@ -89,8 +91,8 @@ export default function Header() {
                         </Link>
                     </div>
                     <div className="flex h-14 items-center pr-4">
-                        <Link to={`/p/${userInfo.username}`}>
-                            <img src={userInfo.photo} className="h-10 w-10 rounded-full object-cover" />
+                        <Link to={`/p/${userInfo?.username}`}>
+                            <img src={userInfo?.photo} className="h-10 w-10 rounded-full object-cover" />
                         </Link>
                     </div>
                     <div className="pr-4 cursor-pointer" onClick={handleSignOut}>
@@ -112,20 +114,20 @@ export default function Header() {
                 </div>
             </div>
         </div>
-    );
+    ) : null;
 }
 
-Header.propTypes = {
-    userInfo: PropTypes.shape({
-        dateCreated: PropTypes.number,
-        email: PropTypes.string,
-        followers: PropTypes.array,
-        following: PropTypes.array,
-        fullName: PropTypes.string,
-        userId: PropTypes.string,
-        username: PropTypes.string,
-        category: PropTypes.string,
-        photo: PropTypes.string,
-        title: PropTypes.string,
-    }),
-};
+// Header.propTypes = {
+//     userInfo: PropTypes.shape({
+//         dateCreated: PropTypes.number,
+//         email: PropTypes.string,
+//         followers: PropTypes.array,
+//         following: PropTypes.array,
+//         fullName: PropTypes.string,
+//         userId: PropTypes.string,
+//         username: PropTypes.string,
+//         category: PropTypes.string,
+//         photo: PropTypes.string,
+//         title: PropTypes.string,
+//     }),
+// };

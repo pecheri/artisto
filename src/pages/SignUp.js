@@ -41,10 +41,13 @@ export default function SignUp() {
                     bio: '',
                     followers: [],
                     following: [],
-                    photo: '',
+                    photo: 'https://res.cloudinary.com/dvhwserkv/image/upload/v1629400603/360_F_346839683_6nAPzbhpSkIpb8pmAwufkC7c5eD7wYws_g5xlcp.jpg',
                     dateCreated: Date.now(),
                 });
-                history.push(ROUTES.DASHBOARD);
+                const timer = setTimeout(() => {
+                    history.push(ROUTES.DASHBOARD);
+                }, 1000);
+                // history.push(ROUTES.DASHBOARD);
             } catch (error) {
                 setError(error.message);
             }

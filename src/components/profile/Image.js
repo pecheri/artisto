@@ -48,7 +48,7 @@ export default function Image({ photo, profileUserInfo }) {
                     onClick={(e) => {
                         closeImage(e);
                     }}
-                    className="flex justify-center w-screen pt-20 bg-gray-primary bg-opacity-50 absolute top-0 left-0 z-90"
+                    className="flex justify-center w-screen pt-20 bg-gray-primary bg-opacity-50 absolute top-0 left-0 z-90 h-screen"
                 >
                     <div className="w-full max-w-screen-sm pb-8">
                         <ImageDetails photo={photo} profileUsername={profileUserInfo.username} />

@@ -3,12 +3,10 @@ import PropTypes from 'prop-types';
 import useUser from '../../hooks/useUser';
 import { IsUserFollowingProfileUser } from '../../services/firebase';
 import { toggleFollow } from '../../services/firebase';
-import { Link, useHistory } from 'react-router-dom';
-import * as ROUTES from '../../constants/routes';
-import Skeleton, { SkeletonTheme } from 'react-loading-skeleton';
+import { useHistory } from 'react-router-dom';
 import FollowingFollwersList from './FollowingFollwersList';
 
-export default function ProfileHeader({ profileUserInfo, photos, photoCounts }) {
+export default function ProfileHeader({ profileUserInfo, photoCounts }) {
     const {
         userInfo: { username, docId, userId },
     } = useUser();
@@ -23,6 +21,7 @@ export default function ProfileHeader({ profileUserInfo, photos, photoCounts }) 
         const checkIfUsersFollowing = async () => {
             const result = await IsUserFollowingProfileUser(username, profileUserInfo.userId);
             setIsUserFollowing(!!result);
+            setFollowersCount(profileUserInfo.followers.length);
         };
         if (profileUserInfo && username) {
             checkIfUsersFollowing();
