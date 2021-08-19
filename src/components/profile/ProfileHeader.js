@@ -68,7 +68,7 @@ export default function ProfileHeader({ profileUserInfo, photos, photoCounts }) 
                     <img
                         src={profileUserInfo.photo}
                         alt={`${profileUserInfo.username} profile photo`}
-                        className="w-36 h-36 rounded-full"
+                        className="w-36 h-36 rounded-full object-cover"
                     />
                 </div>
 

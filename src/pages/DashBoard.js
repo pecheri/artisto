@@ -17,7 +17,6 @@ export default function DashBoard() {
         const getUserInfo = async () => {
             const [result] = await getUserByUserId(user.uid);
             setUserInfo(result);
-            console.log('result', result);
         };
         if (user) {
             getUserInfo();

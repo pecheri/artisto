@@ -10,12 +10,11 @@ export default function SearchIndex() {
     const [results, setResults] = useState(null);
     const [displayFilterButtons, setDisplayFilterButtons] = useState(false);
 
-    console.log(selectedCategory);
-
     const isInvalid = searchKeyword === '' || selectedCategory === '';
 
     const searchHandle = async (event) => {
         event.preventDefault();
+        setSelectedFilter('all');
         const result = await getSearchResults(selectedCategory);
         setResults(result);
         setDisplayFilterButtons(true);

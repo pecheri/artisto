@@ -1,15 +1,24 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 
 export default function Result({ username, fullName, photo, title, bio }) {
     return (
         <div className="w-3/4 min-w-full mx-auto text-gray-light mb-8">
             <div className="grid grid-cols-6 items-center">
                 <div className="flex justify-end">
-                    <img src={photo} alt={`${username} profile photo`} className="w-16 h-16 rounded-full" />
+                    <Link to={`/p/${username}`}>
+                        <img
+                            src={photo}
+                            alt={`${username} profile photo`}
+                            className="w-16 h-16 rounded-full object-cover"
+                        />
+                    </Link>
                 </div>
                 <div className="ml-6 col-span-5">
-                    <p className="text-lg">{fullName}</p>
+                    <Link to={`/p/${username}`}>
+                        <p className="text-lg">{fullName}</p>
+                    </Link>
                     <p className="text-sm">
                         <span className="text-xs">ID: </span>
                         {username}

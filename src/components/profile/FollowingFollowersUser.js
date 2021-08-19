@@ -7,7 +7,7 @@ export default function FollowingFollowersUser({ username, fullName, photo, setF
         <div className="p-2 flex mx-auto items-center">
             <Link to={`/p/${username}`} onClick={() => setFollowingOrFollowers()}>
                 <div>
-                    <img src={photo} className="h-10 w-10 rounded-full" />
+                    <img src={photo} className="h-10 w-10 rounded-full object-cover" />
                 </div>
             </Link>
             <div className="pl-4">

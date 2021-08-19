@@ -35,7 +35,7 @@ export default function SideProfile() {
                             {!userInfo.photo ? (
                                 <Skeleton width={144} height={144} circle={true} />
                             ) : (
-                                <img src={userInfo.photo} className="w-36 rounded-full" />
+                                <img src={userInfo.photo} className="h-36 w-36 rounded-full object-cover" />
                             )}
                         </Link>
                     </div>

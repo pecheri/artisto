@@ -1,5 +1,6 @@
 import React, { lazy, Suspense } from 'react';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+// import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { HashRouter as Router, Route, Switch } from 'react-router-dom';
 import * as ROUTES from './constants/routes';
 import UserContext from './context/user';
 import useAuthListener from './hooks/useAuthListener';
@@ -13,6 +14,7 @@ const Profile = lazy(() => import('./pages/Profile'));
 const ProfileEdit = lazy(() => import('./pages/ProfileEdit'));
 const Search = lazy(() => import('./pages/Search'));
 const Messages = lazy(() => import('./pages/Messages'));
+const UploadImage = lazy(() => import('./pages/UploadImage'));
 const NotFound = lazy(() => import('./pages/NotFound'));
 
 function App() {
@@ -36,6 +38,7 @@ function App() {
                         <Route path={ROUTES.PROFILE_EDIT} component={ProfileEdit} />
                         <Route path={ROUTES.SEARCH} component={Search} />
                         <Route path={ROUTES.MESSAGES} component={Messages} />
+                        <Route path={ROUTES.UPLOAD_IMAGE} component={UploadImage} />
                         <Route component={NotFound} />
                     </Switch>
                 </Suspense>

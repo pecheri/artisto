@@ -1,5 +1,7 @@
 import { firebase, FieldValue } from '../lib/firebase';
 import Axios from 'axios';
+const cloudName = `${process.env.REACT_APP_CLOUD_NAME}`;
+const presets = `${process.env.REACT_APP_PRESETS}`;
 
 export async function doesUsernameExist(username) {
     const result = await firebase.firestore().collection('users').where('username', '==', username).get();
@@ -77,6 +79,20 @@ export async function getPhotosbyUserId(userId) {
     return photos;
 }
 
+export async function getLatestPhotoInfo(photoId, userId, profileUsername) {
+    const result = await firebase.firestore().collection('photos').where('photoId', '==', photoId).get();
+    const [photoWithDetails] = await result.docs.map((photo) => ({
+        ...photo.data(),
+        docId: photo.id,
+    }));
+    console.log(photoWithDetails);
+    let userLikedPhoto = false;
+    if (photoWithDetails.likes.includes(userId)) {
+        userLikedPhoto = true;
+    }
+    return { ...photoWithDetails, userLikedPhoto, username: profileUsername };
+}
+
 export async function updateUserFollowing(userDocId, profileUserId, isUserFollowing) {
     firebase
         .firestore()
@@ -137,10 +153,10 @@ export async function updateProfilePhoto(imageFile) {
     let url = '';
     const formData = new FormData();
     formData.append('file', imageFile[0]);
-    formData.append('upload_preset', 's4onxndn');
+    formData.append('upload_preset', presets);
     formData.append('cloud_name', 'test');
 
-    Axios.post('https://api.cloudinary.com/v1_1/dvhwserkv/image/upload', formData)
+    Axios.post(`https://api.cloudinary.com/v1_1/${cloudName}/image/upload`, formData)
         // .then((response) => console.log('response', response))
         .then(({ data }) => {
             console.log(JSON.stringify(data.secure_url));
@@ -155,16 +171,12 @@ export async function updateProfile(docId, fullName, category, title, bio, image
         let url = '';
         const formData = new FormData();
         formData.append('file', imageFile[0]);
-        formData.append('upload_preset', 's4onxndn');
-        formData.append('cloud_name', 'test');
+        formData.append('upload_preset', presets);
 
-        await Axios.post('https://api.cloudinary.com/v1_1/dvhwserkv/image/upload', formData)
-            // .then((response) => console.log('response', response))
-            .then(({ data }) => {
-                // console.log(JSON.stringify(data.secure_url));
-                url = data.secure_url;
-                console.log('url', url);
-            });
+        await Axios.post(`https://api.cloudinary.com/v1_1/${cloudName}/image/upload`, formData).then(({ data }) => {
+            url = data.secure_url;
+            console.log('url', url);
+        });
 
         firebase.firestore().collection('users').doc(docId).update({
             fullName,
@@ -182,4 +194,30 @@ export async function updateProfile(docId, fullName, category, title, bio, image
         });
     }
 }
-// s4onxndn
+
+export async function uploadNewPost(caption, imageFile, userId) {
+    let url = '';
+    const formData = new FormData();
+    formData.append('file', imageFile[0]);
+    formData.append('upload_preset', presets);
+
+    await Axios.post(`https://api.cloudinary.com/v1_1/${cloudName}/image/upload`, formData).then(({ data }) => {
+        url = data.secure_url;
+        console.log('url', url);
+    });
+
+    await firebase
+        .firestore()
+        .collection('photos')
+        .add({
+            caption,
+            comments: [],
+            dateCreated: Date.now(),
+            imageSrc: url,
+            likes: [],
+            photoId: userId + Date.now(),
+            userId,
+            userLatitude: 34.0522,
+            userLongitude: -188.2437,
+        });
+}

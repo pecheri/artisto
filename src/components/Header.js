@@ -40,6 +40,19 @@ export default function Header() {
                 </Link>
                 <div className="flex flex-row items-center">
                     <div className="pr-4">
+                        <Link to={ROUTES.UPLOAD_IMAGE}>
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                className="h-8 w-8 text-gray-light"
+                                fill="none"
+                                viewBox="0 0 24 24"
+                                stroke="currentColor"
+                            >
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 4v16m8-8H4" />
+                            </svg>
+                        </Link>
+                    </div>
+                    <div className="pr-4">
                         <Link to={ROUTES.SEARCH}>
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"
@@ -77,7 +90,7 @@ export default function Header() {
                     </div>
                     <div className="flex h-14 items-center pr-4">
                         <Link to={`/p/${userInfo.username}`}>
-                            <img src={userInfo.photo} className="h-10 w-10 rounded-full" />
+                            <img src={userInfo.photo} className="h-10 w-10 rounded-full object-cover" />
                         </Link>
                     </div>
                     <div className="pr-4 cursor-pointer" onClick={handleSignOut}>

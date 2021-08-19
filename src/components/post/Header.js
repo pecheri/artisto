@@ -21,7 +21,11 @@ export default function Header({ username, userId, caption, date }) {
         <div className="">
             <div className="flex">
                 <Link to={`/p/${username}`}>
-                    <img src={userPhotoSrc} alt={`${username} profile photo`} className="w-12 h-12 rounded-full mr-4" />
+                    <img
+                        src={userPhotoSrc}
+                        alt={`${username} profile photo`}
+                        className="w-12 h-12 rounded-full mr-4 object-cover"
+                    />
                 </Link>
                 <div>
                     <Link to={`/p/${username}`}>

@@ -10,8 +10,6 @@ export default function Timeline() {
     const { user } = useContext(UserContext);
     const { photos } = usePhotos();
 
-    console.log('photos', photos);
-
     return (
         <div className="col-span-2 container">
             {!photos ? (

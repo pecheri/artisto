@@ -8,9 +8,6 @@ export default function Comments({ allComments, setAllComments, docId }) {
     const [viewAll, setViewAll] = useState(false);
     const { user } = useContext(UserContext);
 
-    // const handleViewAllComments = () => {
-    //     setViewAll(true);
-    // };
     return (
         <div className="pt-2">
             <div>

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import Result from './Result';
+import useUser from '../../hooks/useUser';
 
 export default function Results({ results, selectedFilter, searchKeyword }) {
     const notFound = (
@@ -9,9 +10,14 @@ export default function Results({ results, selectedFilter, searchKeyword }) {
         </div>
     );
 
+    const {
+        userInfo: { userId },
+    } = useUser();
+
     const getFilteredResults = () => {
+        const resultsWithoutUser = results.filter((item) => userId !== item.userId);
         if (selectedFilter === 'all') {
-            const users = results
+            const users = resultsWithoutUser
                 .filter(
                     (user) =>
                         user.username.includes(searchKeyword.toLowerCase()) ||
@@ -35,7 +41,7 @@ export default function Results({ results, selectedFilter, searchKeyword }) {
                 return notFound;
             }
         } else if (selectedFilter === 'username') {
-            const users = results
+            const users = resultsWithoutUser
                 .filter(
                     (user) =>
                         user.username.includes(searchKeyword.toLowerCase()) ||
@@ -57,7 +63,7 @@ export default function Results({ results, selectedFilter, searchKeyword }) {
                 return notFound;
             }
         } else if (selectedFilter === 'title') {
-            const users = results
+            const users = resultsWithoutUser
                 .filter((user) => user.title.toLowerCase().includes(searchKeyword.toLowerCase()))
                 .map((user, index) => (
                     <Result
@@ -75,7 +81,7 @@ export default function Results({ results, selectedFilter, searchKeyword }) {
                 return notFound;
             }
         } else if (selectedFilter === 'bio') {
-            const users = results
+            const users = resultsWithoutUser
                 .filter((user) => user.bio.toLowerCase().includes(searchKeyword.toLowerCase()))
                 .map((user, index) => (
                     <Result
