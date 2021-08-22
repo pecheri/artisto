@@ -24,7 +24,7 @@ export default function FollowingFollwersList({ following, followers, followingO
         }
     }, [followingOrFollowers]);
     return (
-        <div className="bg-gray-light h-3/4 max-w-sm w-96 rounded text-gray-dark p-8">
+        <div className="bg-gray-light h-full sm:max-w-sm sm:w-96 w-screen rounded text-gray-dark p-8 overflow-scroll relative">
             {list ? (
                 list.map((item, index) => (
                     <FollowingFollowersUser

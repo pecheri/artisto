@@ -33,7 +33,7 @@ export default function Header({ username, userId, caption, date }) {
                     <Link to={`/p/${username}`}>
                         <p className="font-bold text-gray-dark">{username}</p>
                     </Link>
-                    <p className="text-gray-dark break-words">{caption}</p>
+                    <p className="text-gray-dark break-words text-xs sm:text-sm">{caption}</p>
                 </div>
             </div>
             <p className="text-gray-primary text-xs pt-2 text-right">{formatDistance(date, new Date())} ago</p>

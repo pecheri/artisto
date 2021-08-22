@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Header from '../components/Header';
 import { useHistory } from 'react-router-dom';
 import { uploadNewPost } from '../services/firebase';
@@ -11,7 +11,9 @@ export default function UploadImage() {
     const [upload, setUpload] = useState(false);
     const history = useHistory();
 
-    console.log('upload', upload);
+    useEffect(() => {
+        document.title = 'Post - Artisto';
+    }, []);
 
     const {
         userInfo: { userId, username },
@@ -47,11 +49,11 @@ export default function UploadImage() {
                     </p>
                 </div>
             )}
-            <div className="container max-w-screen-lg mx-auto">
-                <div className="pt-32 flex">
-                    <form onSubmit={postSubmit} className="flex w-full max-w-screen-lg mx-auto">
-                        <div className="w-1/2">
-                            <div className="border-gray-light border-dotted border-4 flex relative h-96 items-center justify-center rounded-xl">
+            <div className="container max-w-screen-lg mx-auto px-4 mb-8">
+                <div className="pt-20 flex max-h-screen">
+                    <form onSubmit={postSubmit} className="sm:flex w-full max-w-screen-lg mx-auto">
+                        <div className="sm:w-1/2 pb-4 sm:pb-0 max-h-full">
+                            <div className="border-gray-light border-dotted border-4 flex relative h-60 sm:h-96 max-h-full items-center justify-center rounded-xl">
                                 {image && (
                                     <button onClick={removeImageSelected} className="absolute top-0 left-0">
                                         <svg
@@ -73,7 +75,7 @@ export default function UploadImage() {
 
                                 {image ? (
                                     <div className="flex w-full h-full">
-                                        <img src={image} className="p-4 m-4 mx-auto" />
+                                        <img src={image} className="p-4 m-4 mx-auto object-contain" />
                                     </div>
                                 ) : (
                                     <div>
@@ -94,7 +96,7 @@ export default function UploadImage() {
                                 )}
                             </div>
                         </div>
-                        <div className="w-1/2 h-96 flex justify-center items-end pl-8">
+                        <div className="sm:w-1/2 sm:h-96 flex justify-center items-end sm:pl-8 max-h-full ">
                             <div className="w-full">
                                 <textarea
                                     placeholder="Write a caption..."
@@ -105,7 +107,7 @@ export default function UploadImage() {
                                 <button
                                     type="submit"
                                     disabled={isInvalid}
-                                    className={`mt-4 bg-yellow-primary text-gray-dark py-2 px-6 rounded ${
+                                    className={`mt-4 bg-yellow-primary text-gray-dark py-2 px-6 rounded mx-auto sm:mx-0 block ${
                                         isInvalid && 'opacity-50'
                                     }`}
                                 >

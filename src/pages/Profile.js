@@ -25,6 +25,10 @@ export default function Profile() {
         }
     }, [username]);
 
+    useEffect(() => {
+        document.title = `${username} - Artisto`;
+    }, [username]);
+
     return profileUserInfo?.username ? (
         <div>
             <Header />

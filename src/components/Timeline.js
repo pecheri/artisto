@@ -36,7 +36,7 @@ export default function Timeline() {
     }, [userId]);
 
     return (
-        <div className="col-span-2 container">
+        <div className="col-span-3 w-full mx-auto md:col-span-2">
             {!photos ? (
                 <SkeletonTheme color="#494848" highlightColor="#F1F1F1">
                     <Skeleton count={4} width={640} height={500} />

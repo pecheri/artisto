@@ -1,9 +1,13 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Header from '../components/Header';
 import SideProfile from '../components/SideProfile';
 import SearchIndex from '../components/search';
 
 export default function Search() {
+    useEffect(() => {
+        document.title = 'Search - Artisto';
+    }, []);
+
     return (
         <div className="font-body">
             <Header />

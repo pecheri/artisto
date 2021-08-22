@@ -33,19 +33,20 @@ export default function Header() {
     }, [userId]);
 
     return userInfo ? (
-        <div className="bg-gray-dark w-screen h-14 flex justify-center items-center fixed z-50">
-            <div className="max-w-screen-xl w-screen h-14 flex justify-between items-center">
+        <div className="bg-gray-dark w-screen h-14 flex justify-center items-center fixed z-50 top-0 left-0">
+            <div className="max-w-screen-xl w-full h-14 flex justify-between items-center">
                 <Link to={ROUTES.DASHBOARD}>
-                    <h1 className="h-14 flex">
-                        <img src={logo} alt="artisto" />
+                    <h1 className="flex sm:h-14 sm:w-auto w-28">
+                        {/* <h1 className="sm:h-14 sm:w-auto w-28 flex"> */}
+                        <img src={logo} alt="artisto" className="sm:h-full sm:w-auto w-full h-auto" />
                     </h1>
                 </Link>
                 <div className="flex flex-row items-center">
-                    <div className="pr-4">
+                    <div className="pr-2 sm:pr-4">
                         <Link to={ROUTES.UPLOAD_IMAGE}>
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"
-                                className="h-8 w-8 text-gray-light"
+                                className="h-5 w-5 sm:h-8 sm:w-8 text-gray-light"
                                 fill="none"
                                 viewBox="0 0 24 24"
                                 stroke="currentColor"
@@ -54,11 +55,11 @@ export default function Header() {
                             </svg>
                         </Link>
                     </div>
-                    <div className="pr-4">
+                    <div className="pr-2 sm:pr-4">
                         <Link to={ROUTES.SEARCH}>
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"
-                                className="h-8 w-8 text-gray-light"
+                                className="h-5 w-5 sm:h-8 sm:w-8 text-gray-light"
                                 fill="none"
                                 viewBox="0 0 24 24"
                                 stroke="currentColor"
@@ -72,11 +73,11 @@ export default function Header() {
                             </svg>
                         </Link>
                     </div>
-                    <div className="pr-4">
+                    <div className="pr-2 sm:pr-4">
                         <Link to={ROUTES.MESSAGES}>
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"
-                                className="h-8 w-8 text-gray-light"
+                                className="h-5 w-5 sm:h-8 sm:w-8 text-gray-light"
                                 fill="none"
                                 viewBox="0 0 24 24"
                                 stroke="currentColor"
@@ -90,15 +91,15 @@ export default function Header() {
                             </svg>
                         </Link>
                     </div>
-                    <div className="flex h-14 items-center pr-4">
+                    <div className="flex h-14 items-center pr-2 sm:pr-4">
                         <Link to={`/p/${userInfo?.username}`}>
-                            <img src={userInfo?.photo} className="h-10 w-10 rounded-full object-cover" />
+                            <img src={userInfo?.photo} className="h-5 w-5 sm:h-10 sm:w-10 rounded-full object-cover" />
                         </Link>
                     </div>
-                    <div className="pr-4 cursor-pointer" onClick={handleSignOut}>
+                    <div className="pr-2 sm:pr-4 cursor-pointer" onClick={handleSignOut}>
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
-                            className="h-8 w-8 text-gray-light"
+                            className="h-5 w-5 sm:h-8 sm:w-8 text-gray-light"
                             fill="none"
                             viewBox="0 0 24 24"
                             stroke="currentColor"

@@ -21,18 +21,18 @@ export default function SearchIndex() {
     };
 
     return (
-        <div className="col-span-2 container">
+        <div className="md:col-span-2 col-span-3 container mx-auto">
             <div>
-                <form className="grid grid-cols-7 items-center" onSubmit={searchHandle}>
+                <form className="grid grid-cols-3 sm:grid-cols-7 items-center" onSubmit={searchHandle}>
                     <input
                         type="text"
                         placeholder="Search..."
-                        className="bg-gray-light p-1 h-10 text-sm rounded-l border-r border-gray-primary col-span-4"
+                        className="bg-gray-light p-1 h-10 text-sm rounded sm:rounded-none sm:rounded-l border-r border-gray-primary sm:col-span-4 col-span-3"
                         value={searchKeyword}
                         onChange={({ target }) => setSearchKeyword(target.value)}
                     />
                     <select
-                        className="bg-gray-light p-1 h-10 text-sm text-gray-dark col-span-2 capitalize"
+                        className="bg-gray-light p-1 h-10 text-sm text-gray-dark col-span-2 capitalize mt-2 mr-2 sm:mt-0 sm:mr-0 rounded-none"
                         onChange={({ target }) => setSelectedCategory(target.value)}
                         value={selectedCategory}
                     >
@@ -48,7 +48,7 @@ export default function SearchIndex() {
                     </select>
                     <button
                         type="submit"
-                        className={`bg-gray-dark text-gray-light h-10 p-1 text-sm rounded-r ${
+                        className={`bg-gray-dark text-gray-light h-10 p-1 text-sm rounded sm:rounded-none sm:rounded-r mt-2 sm:mt-0 ${
                             isInvalid && 'opacity-50'
                         }`}
                         disabled={isInvalid}

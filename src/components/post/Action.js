@@ -32,7 +32,7 @@ export default function Action({ likes, userLikedPhoto, comments, docId }) {
                 <div className="flex items-end">
                     <svg
                         xmlns="http://www.w3.org/2000/svg"
-                        className={`h-8 w-8 text-gray-dark cursor-pointer ${isUserLiked && 'fill-red'} `}
+                        className={`sm:h-8 sm:w-8 h-6 w-6 text-gray-dark cursor-pointer ${isUserLiked && 'fill-red'} `}
                         fill="none"
                         viewBox="0 0 24 24"
                         stroke="currentColor"
@@ -50,7 +50,7 @@ export default function Action({ likes, userLikedPhoto, comments, docId }) {
                 <div className="flex items-end pl-4">
                     <svg
                         xmlns="http://www.w3.org/2000/svg"
-                        className="h-8 w-8 text-gray-dark cursor-pointer"
+                        className="h-6 w-6 sm:h-8 sm:w-8 text-gray-dark cursor-pointer"
                         fill="none"
                         viewBox="0 0 24 24"
                         stroke="currentColor"

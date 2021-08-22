@@ -32,6 +32,10 @@ export default function ProfileEdit() {
         }
     }, [userId]);
 
+    useEffect(() => {
+        document.title = `Profile Edit - Artisto`;
+    }, [username]);
+
     const onImageChange = (event) => {
         setImageFile(event.target.files);
         if (event.target.files && event.target.files[0]) {

@@ -7,27 +7,11 @@ import { getUserByUserId } from '../services/firebase';
 import useUser from '../hooks/useUser';
 
 export default function DashBoard() {
-    // const [userInfo, setUserInfo] = useState({});
-    // const { user } = useContext(UserContext);
-    // useEffect(() => {
-    //     document.title = 'Artisto';
-    // }, []);
-
-    // useEffect(() => {
-    //     const getUserInfo = async () => {
-    //         const [result] = await getUserByUserId(user.uid);
-    //         setUserInfo(result);
-    //     };
-    //     if (user) {
-    //         getUserInfo();
-    //     }
-    // }, [user]);
-
     return (
         <div className="font-body">
             <Header />
-            <div className="w-sceen flex justify-center pt-24">
-                <div className="grid grid-cols-3 w-full max-w-screen-lg mx-4">
+            <div className="w-sceen flex justify-center pt-24 px-4">
+                <div className="grid grid-cols-3 w-full max-w-screen-lg">
                     <Timeline />
                     <SideProfile />
                 </div>

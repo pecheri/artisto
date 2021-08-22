@@ -6,7 +6,7 @@ import Action from './Action';
 
 export default function Post({ photo }) {
     return (
-        <div className="bg-gray-light py-8 px-16 mb-8">
+        <div className="bg-gray-light py-2 sm:py-8 px-2 sm:px-8 mb-8 rounded-sm">
             <Header userId={photo.userId} username={photo.username} caption={photo.caption} date={photo.dateCreated} />
             <Image imageSrc={photo.imageSrc} />
             <Action

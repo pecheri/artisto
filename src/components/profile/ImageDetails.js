@@ -27,7 +27,7 @@ export default function ImageDetails({ photo, profileUsername }) {
     console.log('photoWithDetails', photoWithDetails);
 
     return photoWithDetails?.username ? (
-        <div className="bg-gray-light py-8 px-16 mb-8">
+        <div className="bg-gray-light py-8 px-2 sm:px-8 mx-auto overflow-scroll rounded-sm">
             <Header
                 userId={photoWithDetails.userId}
                 username={photoWithDetails.username}

@@ -35,7 +35,9 @@ export default function AddComment({ allComments, setAllComments, docId }) {
                 />
                 <button
                     type="submit"
-                    className={`p-2 bg-blue-primary text-gray-light rounded-r ${comment.length < 1 && 'opacity-50'}`}
+                    className={`p-2 bg-blue-primary text-gray-light rounded-r sm:text-base text-sm ${
+                        comment.length < 1 && 'opacity-50'
+                    }`}
                 >
                     SEND
                 </button>

@@ -4,20 +4,20 @@ import { Link } from 'react-router-dom';
 
 export default function Result({ username, fullName, photo, title, bio }) {
     return (
-        <div className="w-3/4 min-w-full mx-auto text-gray-light mb-8">
+        <div className="w-full mx-auto text-gray-light mb-8">
             <div className="grid grid-cols-6 items-center">
                 <div className="flex justify-end">
                     <Link to={`/p/${username}`}>
                         <img
                             src={photo}
                             alt={`${username} profile photo`}
-                            className="w-16 h-16 rounded-full object-cover"
+                            className="sm:w-16 sm:h-16 w-12 h-12 rounded-full object-cover"
                         />
                     </Link>
                 </div>
                 <div className="ml-6 col-span-5">
                     <Link to={`/p/${username}`}>
-                        <p className="text-lg">{fullName}</p>
+                        <p className="sm:text-lg text-base">{fullName}</p>
                     </Link>
                     <p className="text-sm">
                         <span className="text-xs">ID: </span>
