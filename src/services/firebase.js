@@ -91,6 +91,28 @@ export async function getLatestPhotoInfo(photoId, userId, profileUsername) {
     return { ...photoWithDetails, userLikedPhoto, username: profileUsername };
 }
 
+export async function getProfilePhotosbyUserId(userId, profileId, profileUsername) {
+    const result = await firebase.firestore().collection('photos').where('userId', '==', profileId).get();
+    const profilePhotos = result.docs.map((photo) => ({
+        ...photo.data(),
+        docId: photo.id,
+    }));
+    const profilePhotosWithDetails = await Promise.all(
+        profilePhotos.map(async (photo) => {
+            let userLikedPhoto = false;
+            if (photo.likes.includes(userId)) {
+                userLikedPhoto = true;
+            }
+            return {
+                username: profileUsername,
+                ...photo,
+                userLikedPhoto,
+            };
+        })
+    );
+    return profilePhotosWithDetails;
+}
+
 export async function updateUserFollowing(userDocId, profileUserId, isUserFollowing) {
     firebase
         .firestore()
@@ -126,14 +148,32 @@ export async function getFollowingOrFollowersList(userIds) {
     return result;
 }
 
-export async function getSearchResults(category) {
-    const result = await firebase.firestore().collection('users').where('category', '==', category).get();
-    const users = result.docs.map((item) => ({
-        ...item.data(),
-        docId: item.id,
-    }));
-    return users;
+export async function getSearchResults(category, searchKeyword) {
+    if (searchKeyword) {
+        const result = await firebase.firestore().collection('users').where('category', '==', category).get();
+        const users = result.docs.map((item) => ({
+            ...item.data(),
+            docId: item.id,
+        }));
+        return users;
+    } else {
+        const result = await firebase.firestore().collection('users').limit(10).where('category', '==', category).get();
+        const users = result.docs.map((item) => ({
+            ...item.data(),
+            docId: item.id,
+        }));
+        return users;
+    }
 }
+
+// export async function getSearchResults(category) {
+//     const result = await firebase.firestore().collection('users').where('category', '==', category).get();
+//     const users = result.docs.map((item) => ({
+//         ...item.data(),
+//         docId: item.id,
+//     }));
+//     return users;
+// }
 
 export async function updateProfilePhoto(imageFile) {
     let url = '';

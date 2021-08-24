@@ -29,7 +29,7 @@ export default function AddComment({ allComments, setAllComments, docId }) {
                     type="text"
                     placeholder="add a comment..."
                     autoComplete="off"
-                    className="text-sm w-full p-2 rounded-l"
+                    className="text-base w-full p-2 rounded-l"
                     value={comment}
                     onChange={({ target }) => setComment(target.value)}
                 />

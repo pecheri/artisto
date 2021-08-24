@@ -23,12 +23,10 @@ export default function ImageDetails({ photo, profileUsername }) {
             latestPhotoInfo();
         }
     }, [userId, photo]);
-    console.log('photo', photo);
-    console.log('photoWithDetails', photoWithDetails);
 
     return photoWithDetails?.username ? (
         <div className="bg-gray-light py-8 px-2 sm:px-8 mx-auto overflow-scroll rounded-sm">
-            <Header
+            {/* <Header
                 userId={photoWithDetails.userId}
                 username={photoWithDetails.username}
                 caption={photoWithDetails.caption}
@@ -40,6 +38,14 @@ export default function ImageDetails({ photo, profileUsername }) {
                 userLikedPhoto={photoWithDetails.userLikedPhoto}
                 comments={photoWithDetails.comments}
                 docId={photoWithDetails.docId}
+            /> */}
+            <Header userId={photo.userId} username={photo.username} caption={photo.caption} date={photo.dateCreated} />
+            <Image imageSrc={photo.imageSrc} />
+            <Action
+                likes={photo.likes}
+                userLikedPhoto={photo.userLikedPhoto}
+                comments={photo.comments}
+                docId={photo.docId}
             />
         </div>
     ) : (
@@ -51,14 +57,16 @@ export default function ImageDetails({ photo, profileUsername }) {
 
 ImageDetails.propTypes = {
     photo: PropTypes.shape({
-        // caption: PropTypes.string.isRequired,
-        // comments: PropTypes.array.isRequired,
-        // dateCreated: PropTypes.number.isRequired,
-        // docId: PropTypes.string.isRequired,
-        // imageSrc: PropTypes.string.isRequired,
-        // likes: PropTypes.array.isRequired,
+        caption: PropTypes.string.isRequired,
+        comments: PropTypes.array.isRequired,
+        dateCreated: PropTypes.number.isRequired,
+        docId: PropTypes.string.isRequired,
+        imageSrc: PropTypes.string.isRequired,
+        likes: PropTypes.array.isRequired,
         photoId: PropTypes.string.isRequired,
-        // userId: PropTypes.string.isRequired,
+        userId: PropTypes.string.isRequired,
+        username: PropTypes.string.isRequired,
+        userLikedPhoto: PropTypes.bool.isRequired,
     }),
     profileUsername: PropTypes.string.isRequired,
 };

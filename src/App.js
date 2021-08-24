@@ -6,6 +6,7 @@ import UserContext from './context/user';
 import useAuthListener from './hooks/useAuthListener';
 import ProtectedRoute from './helpers/ProtectedRoute';
 import IsUserLoggedIn from './helpers/isUserLoggedIn';
+import ScrollToTop from './components/ScrollToTop';
 
 const Login = lazy(() => import('./pages/Login'));
 const SignUp = lazy(() => import('./pages/SignUp'));
@@ -33,6 +34,7 @@ function App() {
                             <Route path={ROUTES.SIGN_UP} component={SignUp} />
                         </IsUserLoggedIn>
                         <ProtectedRoute user={user} path={ROUTES.DASHBOARD} exact>
+                            <ScrollToTop />
                             <DashBoard />
                         </ProtectedRoute>
                         <Route path={ROUTES.PROFILE} component={Profile} />

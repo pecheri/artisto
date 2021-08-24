@@ -47,7 +47,7 @@ export default function Login() {
                                 type="email"
                                 onChange={({ target }) => setEmail(target.value)}
                                 value={email}
-                                className="bg-gray-light w-full p-1 h-10 text-sm"
+                                className="bg-gray-light w-full p-1 h-10 text-base"
                             />
                             <p className="text-gray-light text-sm mt-8">Password</p>
                             <input
@@ -55,7 +55,7 @@ export default function Login() {
                                 type="password"
                                 onChange={({ target }) => setPassword(target.value)}
                                 value={password}
-                                className="bg-gray-light w-full p-1 h-10 text-sm"
+                                className="bg-gray-light w-full p-1 h-10 text-base"
                             />
                             <button
                                 className={`bg-yellow-primary text-gray-dark mt-12 w-full p-1 h-10 rounded ${

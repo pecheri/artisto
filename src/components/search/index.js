@@ -5,19 +5,28 @@ import { getSearchResults } from '../../services/firebase';
 
 export default function SearchIndex() {
     const [searchKeyword, setSearchKeyword] = useState('');
+    const [fixedSearchKeyword, setFixedSearchKeyword] = useState('');
     const [selectedCategory, setSelectedCategory] = useState('');
     const [selectedFilter, setSelectedFilter] = useState('all');
     const [results, setResults] = useState(null);
     const [displayFilterButtons, setDisplayFilterButtons] = useState(false);
+    const [suggestedUsers, setSuggestedUsers] = useState(false);
 
-    const isInvalid = searchKeyword === '' || selectedCategory === '';
+    const isInvalid = selectedCategory === '';
 
     const searchHandle = async (event) => {
         event.preventDefault();
         setSelectedFilter('all');
         const result = await getSearchResults(selectedCategory);
         setResults(result);
-        setDisplayFilterButtons(true);
+        setFixedSearchKeyword(searchKeyword);
+        if (searchKeyword) {
+            setDisplayFilterButtons(true);
+            setSuggestedUsers(false);
+        } else {
+            setDisplayFilterButtons(false);
+            setSuggestedUsers(true);
+        }
     };
 
     return (
@@ -27,7 +36,7 @@ export default function SearchIndex() {
                     <input
                         type="text"
                         placeholder="Search..."
-                        className="bg-gray-light p-1 h-10 text-sm rounded sm:rounded-none sm:rounded-l border-r border-gray-primary sm:col-span-4 col-span-3"
+                        className="bg-gray-light p-1 h-10 text-base rounded sm:rounded-none sm:rounded-l border-r border-gray-primary sm:col-span-4 col-span-3"
                         value={searchKeyword}
                         onChange={({ target }) => setSearchKeyword(target.value)}
                     />
@@ -91,7 +100,15 @@ export default function SearchIndex() {
                     Bio
                 </button>
             </div>
-            <Results results={results} selectedFilter={selectedFilter} searchKeyword={searchKeyword} />
+            <div className={`flex items-center text-gray-light h-10 mt-4 mb-8 ml-4 ${!suggestedUsers && 'hidden'}`}>
+                <p className="h-10 leading-10 border-b border-yellow-primary px-4">Suggested Users</p>
+            </div>
+            <Results
+                results={results}
+                selectedFilter={selectedFilter}
+                searchKeyword={searchKeyword}
+                fixedSearchKeyword={fixedSearchKeyword}
+            />
         </div>
     );
 }

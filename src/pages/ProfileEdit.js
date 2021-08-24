@@ -73,7 +73,7 @@ export default function ProfileEdit() {
                                 type="text"
                                 onChange={({ target }) => setUserFullName(target.value)}
                                 value={userFullName}
-                                className="bg-gray-light w-full p-1 h-10 text-sm col-span-3"
+                                className="bg-gray-light w-full p-1 h-10 text-base col-span-3"
                             />
                         </div>
                         <div className="grid grid-cols-4 mt-8 items-center">
@@ -98,7 +98,7 @@ export default function ProfileEdit() {
                                 type="text"
                                 onChange={({ target }) => setUserTitle(target.value)}
                                 value={userTitle}
-                                className="bg-gray-light w-full p-1 h-10 text-sm col-span-3"
+                                className="bg-gray-light w-full p-1 h-10 text-base col-span-3"
                             />
                         </div>
                         <div className="grid grid-cols-4 mt-8 items-center">
@@ -117,7 +117,7 @@ export default function ProfileEdit() {
                                 <div className="col-span-2">
                                     <label
                                         htmlFor="imageUploader"
-                                        className="cursor-pointer text-sm text-gray-light bg-gray-dark p-2 rounded"
+                                        className="cursor-pointer text-xs sm:text-sm text-gray-light bg-gray-dark p-2 rounded"
                                     >
                                         Choose Image
                                     </label>
@@ -125,11 +125,11 @@ export default function ProfileEdit() {
                                         type="file"
                                         id="imageUploader"
                                         accept="image/*"
-                                        className="text-gray-light w-full p-1 h-10 text-sm hidden"
+                                        className="text-gray-light w-full p-1 h-10 text-base hidden"
                                         onChange={onImageChange}
                                     />
                                 </div>
-                                <div className="flex w-24 h-24">
+                                <div className="flex sm:w-24 sm:h-24 w-16 h-16">
                                     {image && <img src={image} className="rounded-full object-cover w-full h-full" />}
                                 </div>
                             </div>

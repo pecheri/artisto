@@ -74,14 +74,14 @@ export default function SignUp() {
                                 type="text"
                                 onChange={({ target }) => setUsername(target.value)}
                                 value={username}
-                                className="bg-gray-light w-full p-1 h-10 text-sm mb-5"
+                                className="bg-gray-light w-full p-1 h-10 text-base mb-5"
                             />
                             <input
                                 placeholder="Full Name"
                                 type="text"
                                 onChange={({ target }) => setFullName(target.value)}
                                 value={fullName}
-                                className="bg-gray-light w-full p-1 h-10 text-sm mb-5"
+                                className="bg-gray-light w-full p-1 h-10 text-base mb-5"
                             />
                             <select
                                 className="bg-gray-light w-full py-1 h-10 text-sm text-gray-dark mb-5"
@@ -103,7 +103,7 @@ export default function SignUp() {
                                 type="email"
                                 onChange={({ target }) => setEmail(target.value)}
                                 value={email}
-                                className="bg-gray-light w-full p-1 h-10 text-sm mb-5"
+                                className="bg-gray-light w-full p-1 h-10 text-base mb-5"
                             />
 
                             <input
@@ -111,7 +111,7 @@ export default function SignUp() {
                                 type="password"
                                 onChange={({ target }) => setPassword(target.value)}
                                 value={password}
-                                className="bg-gray-light w-full p-1 h-10 text-sm"
+                                className="bg-gray-light w-full p-1 h-10 text-base"
                             />
                             <button
                                 className={`bg-yellow-primary text-gray-dark mt-12 w-full p-1 h-10 rounded ${
