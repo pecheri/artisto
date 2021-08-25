@@ -12,8 +12,6 @@ export default function SideProfile() {
         user: { uid: userId },
     } = useContext(UserContext);
 
-    console.log('userIdSideProfile', userId);
-
     useEffect(() => {
         document.title = 'Artisto';
     }, []);
@@ -24,7 +22,6 @@ export default function SideProfile() {
             while (!result) {
                 [result] = await getUserByUserId(userId);
                 setUserInfo(result);
-                console.log('resultSideProfile', result);
             }
         };
         if (userId) {

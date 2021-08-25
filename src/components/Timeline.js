@@ -6,6 +6,7 @@ import { getUserByUserId, getFollowingPhotosByUserId } from '../services/firebas
 
 export default function Timeline() {
     const [photos, setPhotos] = useState(null);
+    const [refreshing, setRefreshing] = useState(false);
 
     const {
         user: { uid: userId },

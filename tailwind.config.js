@@ -9,6 +9,15 @@ module.exports = {
             zIndex: {
                 90: '90',
             },
+            animation: {
+                fadeIn: 'fadeIn 2s',
+            },
+            keyframes: {
+                fadeIn: {
+                    '0%': { opacity: '0', transform: 'translateY(-20px)' },
+                    '100%': { opacity: '1', transform: 'translateY(0px)' },
+                },
+            },
         },
         fontFamily: {
             body: ['Poppins', 'sans-serif'],

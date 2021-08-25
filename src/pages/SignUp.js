@@ -18,7 +18,7 @@ export default function SignUp() {
     const history = useHistory();
 
     useEffect(() => {
-        document.title = 'Sign In - Artisto';
+        document.title = 'Sign Up - Artisto';
     }, []);
 
     const handleSignUp = async (event) => {
@@ -60,9 +60,12 @@ export default function SignUp() {
     return (
         <div className="sm:flex justify-center container max-w-screen-md items-center h-screen mx-auto px-2 my-2">
             <div className="sm:w-1/2 sm:mx-0 w-60 mx-auto">
-                <h1 className="w-full flex items-center justify-end">
+                <h1 className="w-full flex items-center justify-end ">
                     <img src={logo} alt="artisto" className="" />
                 </h1>
+                <p className="w-full text-sm sm:text-base text-gray-light text-center sm:px-4 animate-fadeIn">
+                    Place for artists to connect with other artists around the world
+                </p>
             </div>
             <div className="sm:w-1/2 sm:max-h-full">
                 <div className="sm:bg-gray-dark rounded">
@@ -89,7 +92,7 @@ export default function SignUp() {
                                 value={category}
                             >
                                 <option hidden value="">
-                                    Category
+                                    Choose Your Art Category
                                 </option>
                                 {categories.sort().map((category, index) => (
                                     <option key={index} value={category}>
