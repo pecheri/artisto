@@ -1,2 +1,0 @@
-(this.webpackJsonpartisto=this.webpackJsonpartisto||[]).push([[16],{107:function(t,n,c){"use strict";c.r(n),c.d(n,"default",(function(){return e}));var i=c(8),r=(c(3),c(11)),s=c(4);function e(){var t=Object(i.g)();return Object(s.jsx)("div",{children:Object(s.jsx)("button",{onClick:function(){t.push(r.a)},children:"Start"})})}}}]);
-//# sourceMappingURL=16.9f4789fd.chunk.js.map
