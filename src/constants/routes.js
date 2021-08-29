@@ -6,5 +6,4 @@ export const PROFILE_EDIT = '/edit/:username';
 export const SEARCH = '/search';
 export const MESSAGES = '/messages';
 export const UPLOAD_IMAGE = '/upload';
-export const WELCOME = '/welcome';
 export const NOT_FOUND = '/not-found';

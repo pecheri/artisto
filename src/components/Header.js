@@ -37,7 +37,6 @@ export default function Header() {
             <div className="max-w-screen-xl w-full h-14 flex justify-between items-center">
                 <Link to={ROUTES.DASHBOARD}>
                     <h1 className="flex sm:h-14 sm:w-auto w-28">
-                        {/* <h1 className="sm:h-14 sm:w-auto w-28 flex"> */}
                         <img src={logo} alt="artisto" className="sm:h-full sm:w-auto w-full h-auto" />
                     </h1>
                 </Link>

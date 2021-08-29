@@ -5,6 +5,7 @@ module.exports = {
         fill: (theme) => ({
             red: theme('colors.red.primary'),
         }),
+
         extend: {
             zIndex: {
                 90: '90',
@@ -17,6 +18,12 @@ module.exports = {
                     '0%': { opacity: '0', transform: 'translateY(-20px)' },
                     '100%': { opacity: '1', transform: 'translateY(0px)' },
                 },
+            },
+            maxWidth: {
+                52: '13rem',
+            },
+            fontSize: {
+                tiny: '10px',
             },
         },
         fontFamily: {
