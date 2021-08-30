@@ -186,9 +186,3 @@ ProfileHeader.propTypes = {
     photos: PropTypes.array,
     photoCounts: PropTypes.number,
 };
-
-{
-    /* <SkeletonTheme color="#494848" highlightColor="#F1F1F1">
-            <Skeleton count={1} width={480} height={200} className="mt-20" />
-        </SkeletonTheme> */
-}

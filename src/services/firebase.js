@@ -1,5 +1,6 @@
 import { firebase, FieldValue } from '../lib/firebase';
 import Axios from 'axios';
+import imageCompression from 'browser-image-compression';
 const cloudName = `${process.env.REACT_APP_CLOUD_NAME}`;
 const presets = `${process.env.REACT_APP_PRESETS}`;
 
@@ -38,11 +39,6 @@ export async function IsUserFollowingProfileUser(username, profileUserId) {
         docId: item.id,
     }));
     return response.userId;
-    // if (user.following.includes(profileUserId)) {
-    //     return true;
-    // } else {
-    //     return false;
-    // }
 }
 
 export async function getFollowingPhotosByUserId(following, userId) {
@@ -166,38 +162,22 @@ export async function getSearchResults(category, searchKeyword) {
     }
 }
 
-// export async function getSearchResults(category) {
-//     const result = await firebase.firestore().collection('users').where('category', '==', category).get();
-//     const users = result.docs.map((item) => ({
-//         ...item.data(),
-//         docId: item.id,
-//     }));
-//     return users;
-// }
-
-export async function updateProfilePhoto(imageFile) {
-    let url = '';
-    const formData = new FormData();
-    formData.append('file', imageFile[0]);
-    formData.append('upload_preset', presets);
-    formData.append('cloud_name', 'test');
-
-    Axios.post(`https://api.cloudinary.com/v1_1/${cloudName}/image/upload`, formData).then(({ data }) => {
-        url = JSON.stringify(data.secure_url);
-    });
-    return url;
-}
-
 export async function updateProfile(docId, fullName, category, title, bio, imageFile, setUpload) {
     setUpload(true);
 
     if (imageFile) {
         let url = '';
-        const formData = new FormData();
-        formData.append('file', imageFile[0]);
-        formData.append('upload_preset', presets);
+        const options = {
+            maxSizeMB: 1,
+            maxWidthOrHeight: 400,
+        };
 
         try {
+            const compressedFile = await imageCompression(imageFile[0], options);
+            const formData = new FormData();
+            formData.append('file', compressedFile);
+            formData.append('upload_preset', presets);
+
             await Axios.post(`https://api.cloudinary.com/v1_1/${cloudName}/image/upload`, formData).then(({ data }) => {
                 url = data.secure_url;
             });
@@ -228,13 +208,18 @@ export async function updateProfile(docId, fullName, category, title, bio, image
 
 export async function uploadNewPost(caption, imageFile, userId, setUpload) {
     let url = '';
-    const formData = new FormData();
-    formData.append('file', imageFile[0]);
-    formData.append('upload_preset', presets);
+    const options = {
+        maxWidthOrHeight: 2000,
+    };
 
     setUpload(true);
 
     try {
+        const compressedFile = await imageCompression(imageFile[0], options);
+        const formData = new FormData();
+        formData.append('file', compressedFile);
+        formData.append('upload_preset', presets);
+
         await Axios.post(`https://api.cloudinary.com/v1_1/${cloudName}/image/upload`, formData).then(({ data }) => {
             url = data.secure_url;
         });

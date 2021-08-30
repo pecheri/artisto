@@ -4,8 +4,6 @@ import ImageDetails from './ImageDetails';
 
 export default function Image({ photo, profileUserInfo, photos, photoCounts }) {
     const [isImageClicked, setIsImageClicked] = useState(false);
-    // const [nextPhoto, setNextPhoto] = useState(photos[photos.indexOf(photo) + 1]);
-    // const [prevPhoto, setPrevPhoto] = useState(photos[photos.indexOf(photo) - 1]);
     const [currentPhoto, setCurrentPhoto] = useState(photo);
 
     const screenToggle = () => {

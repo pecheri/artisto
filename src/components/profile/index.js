@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import ProfileHeader from './ProfileHeader';
 import Images from './Images';
-import { getPhotosbyUserId, getProfilePhotosbyUserId } from '../../services/firebase';
+import { getProfilePhotosbyUserId } from '../../services/firebase';
 import useUser from '../../hooks/useUser';
 
 export default function UserProfile({ profileUserInfo }) {

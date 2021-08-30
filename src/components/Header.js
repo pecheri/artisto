@@ -116,18 +116,3 @@ export default function Header() {
         </div>
     ) : null;
 }
-
-// Header.propTypes = {
-//     userInfo: PropTypes.shape({
-//         dateCreated: PropTypes.number,
-//         email: PropTypes.string,
-//         followers: PropTypes.array,
-//         following: PropTypes.array,
-//         fullName: PropTypes.string,
-//         userId: PropTypes.string,
-//         username: PropTypes.string,
-//         category: PropTypes.string,
-//         photo: PropTypes.string,
-//         title: PropTypes.string,
-//     }),
-// };

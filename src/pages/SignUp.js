@@ -47,7 +47,6 @@ export default function SignUp() {
                 const timer = setTimeout(() => {
                     history.push(ROUTES.DASHBOARD);
                 }, 1000);
-                // history.push(ROUTES.DASHBOARD);
             } catch (error) {
                 setError(error.message);
             }

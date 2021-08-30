@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import UserContext from '../context/user';
 import { getUserByUserId } from '../services/firebase';
 import { Link } from 'react-router-dom';
-import useUser from '../hooks/useUser';
 import Skeleton, { SkeletonTheme } from 'react-loading-skeleton';
 
 export default function SideProfile() {
@@ -28,8 +27,6 @@ export default function SideProfile() {
             getUserInfo();
         }
     }, [userId]);
-
-    // const { userInfo } = useUser();
 
     return (
         <div className="md:flex pt-4 justify-center hidden">

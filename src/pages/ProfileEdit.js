@@ -4,7 +4,6 @@ import useUser from '../hooks/useUser';
 import { categories } from '../lib/categories';
 import { updateProfile } from '../services/firebase';
 import { useHistory } from 'react-router-dom';
-import * as ROUTES from '../constants/routes';
 
 export default function ProfileEdit() {
     const {
@@ -27,7 +26,6 @@ export default function ProfileEdit() {
             setUserBio(bio);
             setUserCategory(category);
             setUserFullName(fullName);
-            // setUserPhoto(photo);
             setUserTitle(title);
         }
     }, [userId]);

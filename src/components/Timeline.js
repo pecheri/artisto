@@ -6,7 +6,6 @@ import { getUserByUserId, getFollowingPhotosByUserId } from '../services/firebas
 
 export default function Timeline() {
     const [photos, setPhotos] = useState(null);
-    const [refreshing, setRefreshing] = useState(false);
 
     const {
         user: { uid: userId },
@@ -21,13 +20,11 @@ export default function Timeline() {
 
             let followedUserPhotos = [];
 
-            // does the user actually follow people?
             if (result.following.length > 0) {
                 followedUserPhotos = await getFollowingPhotosByUserId(result.following, userId);
             } else {
                 null;
             }
-            // re-arrange array to be newest photos first by dateCreated
             followedUserPhotos.sort((a, b) => b.dateCreated - a.dateCreated);
             setPhotos(followedUserPhotos);
         }

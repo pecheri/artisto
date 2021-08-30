@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { getFollowingOrFollowersList } from '../../services/firebase';
 import FollowingFollowersUser from './FollowingFollowersUser';
-import Skeleton, { SkeletonTheme } from 'react-loading-skeleton';
+import Skeleton from 'react-loading-skeleton';
 
 export default function FollowingFollwersList({ following, followers, followingOrFollowers, setFollowingOrFollowers }) {
     const [list, setList] = useState([]);
@@ -43,20 +43,6 @@ export default function FollowingFollwersList({ following, followers, followingO
 }
 
 FollowingFollwersList.propTypes = {
-    // profileUserInfo: PropTypes.shape({
-    //     dateCreated: PropTypes.number,
-    //     email: PropTypes.string,
-    //     followers: PropTypes.array,
-    //     following: PropTypes.array,
-    //     fullName: PropTypes.string,
-    //     userId: PropTypes.string,
-    //     username: PropTypes.string,
-    //     category: PropTypes.string,
-    //     photo: PropTypes.string,
-    //     title: PropTypes.string,
-    //     bio: PropTypes.string,
-    //     docId: PropTypes.string,
-    // }),
     followingOrFollowers: PropTypes.string,
     following: PropTypes.array,
     followers: PropTypes.array,

@@ -3,7 +3,6 @@ import { Route, Redirect } from 'react-router-dom';
 
 export default function IsUserLoggedIn({ user, loggedInPath, children, ...rest }) {
     // children = login / signin
-    console.log('rest', rest);
     return (
         <Route
             {...rest}

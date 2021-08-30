@@ -22,7 +22,6 @@ export default function List({
             <div className="my-auto">
                 <p className="text-sm">{username}</p>
                 <div className="flex text-xs font-extralight">
-                    {/* <p className="mr-2">lol</p> */}
                     <p>{date}</p>
                 </div>
             </div>
