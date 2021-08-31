@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import ImageDetails from './ImageDetails';
 
-export default function Image({ photo, profileUserInfo, photos, photoCounts }) {
+export default function Image({ photo, profileUserInfo, photos }) {
     const [isImageClicked, setIsImageClicked] = useState(false);
     const [currentPhoto, setCurrentPhoto] = useState(photo);
 
@@ -98,7 +98,6 @@ export default function Image({ photo, profileUserInfo, photos, photoCounts }) {
                                 />
                             </svg>
                         </button>
-
                         <ImageDetails photo={currentPhoto} profileUsername={profileUserInfo.username} />
                     </div>
                 </div>

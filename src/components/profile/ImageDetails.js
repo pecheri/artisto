@@ -26,13 +26,18 @@ export default function ImageDetails({ photo, profileUsername }) {
 
     return photoWithDetails?.username ? (
         <div className="bg-gray-light py-8 px-2 sm:px-8 mx-auto overflow-scroll rounded-sm">
-            <Header userId={photo.userId} username={photo.username} caption={photo.caption} date={photo.dateCreated} />
-            <Image imageSrc={photo.imageSrc} />
+            <Header
+                userId={photoWithDetails.userId}
+                username={photoWithDetails.username}
+                caption={photoWithDetails.caption}
+                date={photoWithDetails.dateCreated}
+            />
+            <Image imageSrc={photoWithDetails.imageSrc} />
             <Action
-                likes={photo.likes}
-                userLikedPhoto={photo.userLikedPhoto}
-                comments={photo.comments}
-                docId={photo.docId}
+                likes={photoWithDetails.likes}
+                userLikedPhoto={photoWithDetails.userLikedPhoto}
+                comments={photoWithDetails.comments}
+                docId={photoWithDetails.docId}
             />
         </div>
     ) : (

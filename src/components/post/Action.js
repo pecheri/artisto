@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import Comments from './Comments';
 import UserContext from '../../context/user';
@@ -8,6 +8,14 @@ export default function Action({ likes, userLikedPhoto, comments, docId }) {
     const [likeCount, setLikeCount] = useState(likes.length);
     const [allComments, setAllComments] = useState(comments);
     const [isUserLiked, setIsUserLiked] = useState(userLikedPhoto);
+
+    useEffect(() => {
+        if (docId) {
+            setLikeCount(likes.length);
+            setAllComments(comments);
+            setIsUserLiked(userLikedPhoto);
+        }
+    }, [docId]);
 
     const {
         user: { uid: userId = '' },

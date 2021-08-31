@@ -7,7 +7,7 @@ import { useHistory } from 'react-router-dom';
 
 export default function ProfileEdit() {
     const {
-        userInfo: { bio, category, fullName, photo, title, userId, docId, username },
+        userInfo: { bio, category, fullName, title, userId, docId, username },
     } = useUser();
     const [userBio, setUserBio] = useState(bio);
     const [userCategory, setUserCategory] = useState(category);
@@ -16,8 +16,6 @@ export default function ProfileEdit() {
     const [imageFile, setImageFile] = useState(null);
     const [image, setImage] = useState(null);
     const [upload, setUpload] = useState(false);
-
-    console.log(photo);
 
     const history = useHistory();
 
