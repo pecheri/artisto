@@ -1,43 +1,20 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import Skeleton, { SkeletonTheme } from 'react-loading-skeleton';
 import PropTypes from 'prop-types';
 import Header from '../post/Header';
 import Image from '../post/Image';
 import Action from '../post/Action';
-import useUser from '../../hooks/useUser';
-import { getLatestPhotoInfo } from '../../services/firebase';
 
-export default function ImageDetails({ photo, profileUsername }) {
-    const [photoWithDetails, setPhotoWithDetails] = useState(null);
-
-    const {
-        userInfo: { userId },
-    } = useUser();
-
-    useEffect(() => {
-        const latestPhotoInfo = async () => {
-            const result = await getLatestPhotoInfo(photo.photoId, userId, profileUsername);
-            setPhotoWithDetails(result);
-        };
-        if (userId && photo) {
-            latestPhotoInfo();
-        }
-    }, [userId, photo]);
-
-    return photoWithDetails?.username ? (
+export default function ImageDetails({ photo }) {
+    return photo.username ? (
         <div className="bg-gray-light py-8 px-2 sm:px-8 mx-auto overflow-scroll rounded-sm">
-            <Header
-                userId={photoWithDetails.userId}
-                username={photoWithDetails.username}
-                caption={photoWithDetails.caption}
-                date={photoWithDetails.dateCreated}
-            />
-            <Image imageSrc={photoWithDetails.imageSrc} />
+            <Header userId={photo.userId} username={photo.username} caption={photo.caption} date={photo.dateCreated} />
+            <Image imageSrc={photo.imageSrc} />
             <Action
-                likes={photoWithDetails.likes}
-                userLikedPhoto={photoWithDetails.userLikedPhoto}
-                comments={photoWithDetails.comments}
-                docId={photoWithDetails.docId}
+                likes={photo.likes}
+                userLikedPhoto={photo.userLikedPhoto}
+                comments={photo.comments}
+                docId={photo.docId}
             />
         </div>
     ) : (
@@ -60,5 +37,4 @@ ImageDetails.propTypes = {
         username: PropTypes.string.isRequired,
         userLikedPhoto: PropTypes.bool.isRequired,
     }),
-    profileUsername: PropTypes.string.isRequired,
 };

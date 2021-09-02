@@ -41,7 +41,7 @@ export default function SearchIndex() {
                         onChange={({ target }) => setSearchKeyword(target.value)}
                     />
                     <select
-                        className="bg-gray-light p-1 h-10 text-sm text-gray-dark col-span-2 capitalize mt-2 mr-2 sm:mt-0 sm:mr-0 rounded-none"
+                        className="bg-gray-light p-1 h-10 text-gray-dark col-span-2 capitalize mt-2 mr-2 sm:mt-0 sm:mr-0 rounded-none"
                         onChange={({ target }) => setSelectedCategory(target.value)}
                         value={selectedCategory}
                     >

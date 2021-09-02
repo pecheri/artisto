@@ -74,19 +74,6 @@ export async function getPhotosbyUserId(userId) {
     return photos;
 }
 
-export async function getLatestPhotoInfo(photoId, userId, profileUsername) {
-    const result = await firebase.firestore().collection('photos').where('photoId', '==', photoId).get();
-    const [photoWithDetails] = await result.docs.map((photo) => ({
-        ...photo.data(),
-        docId: photo.id,
-    }));
-    let userLikedPhoto = false;
-    if (photoWithDetails.likes.includes(userId)) {
-        userLikedPhoto = true;
-    }
-    return { ...photoWithDetails, userLikedPhoto, username: profileUsername };
-}
-
 export async function getProfilePhotosbyUserId(userId, profileId, profileUsername) {
     const result = await firebase.firestore().collection('photos').where('userId', '==', profileId).get();
     const profilePhotos = result.docs.map((photo) => ({

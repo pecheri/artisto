@@ -24,6 +24,8 @@ export default function UserProfile({ profileUserInfo }) {
         }
     }, [profileUserInfo?.userId, userId]);
 
+    console.log('photos(index)', photos);
+
     return (
         <div className="max-w-screen-lg container mx-auto px-4">
             <ProfileHeader profileUserInfo={profileUserInfo} photos={photos} photoCounts={photoCounts} />
