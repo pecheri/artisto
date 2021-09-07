@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import ImageDetails from './ImageDetails';
 
-export default function Image({ photo, profileUserInfo, photos }) {
+export default function Image({ photo, profileUserInfo, photos, isUserLikedToggle, addNewComment }) {
     const [isImageClicked, setIsImageClicked] = useState(false);
     const [currentPhoto, setCurrentPhoto] = useState(photo);
 
@@ -98,7 +98,12 @@ export default function Image({ photo, profileUserInfo, photos }) {
                                 />
                             </svg>
                         </button>
-                        <ImageDetails photo={currentPhoto} profileUsername={profileUserInfo.username} />
+                        <ImageDetails
+                            photo={currentPhoto}
+                            profileUsername={profileUserInfo.username}
+                            isUserLikedToggle={isUserLikedToggle}
+                            addNewComment={addNewComment}
+                        />
                     </div>
                 </div>
             )}
@@ -118,4 +123,6 @@ Image.propTypes = {
     }),
     photos: PropTypes.array,
     photoCounts: PropTypes.number.isRequired,
+    isUserLikedToggle: PropTypes.func.isRequired,
+    addNewComment: PropTypes.func.isRequired,
 };

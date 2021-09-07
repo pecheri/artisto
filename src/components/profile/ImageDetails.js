@@ -3,9 +3,9 @@ import Skeleton, { SkeletonTheme } from 'react-loading-skeleton';
 import PropTypes from 'prop-types';
 import Header from '../post/Header';
 import Image from '../post/Image';
-import Action from '../post/Action';
+import Action from '../profile/Action';
 
-export default function ImageDetails({ photo }) {
+export default function ImageDetails({ photo, isUserLikedToggle, addNewComment }) {
     return photo.username ? (
         <div className="bg-gray-light py-8 px-2 sm:px-8 mx-auto overflow-scroll rounded-sm">
             <Header userId={photo.userId} username={photo.username} caption={photo.caption} date={photo.dateCreated} />
@@ -15,6 +15,9 @@ export default function ImageDetails({ photo }) {
                 userLikedPhoto={photo.userLikedPhoto}
                 comments={photo.comments}
                 docId={photo.docId}
+                isUserLikedToggle={isUserLikedToggle}
+                addNewComment={addNewComment}
+                photo={photo}
             />
         </div>
     ) : (
@@ -37,4 +40,7 @@ ImageDetails.propTypes = {
         username: PropTypes.string.isRequired,
         userLikedPhoto: PropTypes.bool.isRequired,
     }),
+    photos: PropTypes.object,
+    isUserLikedToggle: PropTypes.func.isRequired,
+    addNewComment: PropTypes.func.isRequired,
 };

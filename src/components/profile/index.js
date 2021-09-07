@@ -8,6 +8,7 @@ import useUser from '../../hooks/useUser';
 export default function UserProfile({ profileUserInfo }) {
     const [photos, setPhotos] = useState(null);
     const [photoCounts, setPhotoCounts] = useState(0);
+    console.log('photos', photos);
 
     const {
         userInfo: { userId },
@@ -24,13 +25,43 @@ export default function UserProfile({ profileUserInfo }) {
         }
     }, [profileUserInfo?.userId, userId]);
 
-    console.log('photos(index)', photos);
+    const isUserLikedToggle = (currentPhoto, userId) => {
+        const updatedPhotos = photos;
+        // update userLIkedPhoto
+        updatedPhotos[photos.indexOf(currentPhoto)].userLikedPhoto =
+            !photos[photos.indexOf(currentPhoto)].userLikedPhoto;
+
+        // update likeCounts
+        const index = updatedPhotos[photos.indexOf(currentPhoto)].likes.indexOf(userId);
+        if (index > -1) {
+            updatedPhotos[photos.indexOf(currentPhoto)].likes.splice(index, 1);
+        } else {
+            updatedPhotos[photos.indexOf(currentPhoto)].likes.push(userId);
+        }
+        setPhotos(updatedPhotos);
+    };
+
+    const addNewComment = (currentPhoto, comment, userId, displayName) => {
+        const updatedPhotos = photos;
+        const currentPhotosComments = photos[photos.indexOf(currentPhoto)].comments;
+        updatedPhotos[photos.indexOf(currentPhoto)].comments = [
+            { comment, userId, displayName },
+            ...currentPhotosComments,
+        ];
+        setPhotos(updatedPhotos);
+    };
 
     return (
         <div className="max-w-screen-lg container mx-auto px-4">
             <ProfileHeader profileUserInfo={profileUserInfo} photos={photos} photoCounts={photoCounts} />
             {!photos ? null : photos.length > 0 ? (
-                <Images profileUserInfo={profileUserInfo} photos={photos} photoCounts={photoCounts} />
+                <Images
+                    profileUserInfo={profileUserInfo}
+                    photos={photos}
+                    photoCounts={photoCounts}
+                    isUserLikedToggle={isUserLikedToggle}
+                    addNewComment={addNewComment}
+                />
             ) : (
                 <div className="mt-8 border-t-2 border-gray-dark">
                     <p className="text-gray-light text-center pt-8">No Posts</p>

@@ -4,18 +4,21 @@ import Comments from './Comments';
 import UserContext from '../../context/user';
 import FirebaseContext from '../../context/firebase';
 
-export default function Action({ likes, userLikedPhoto, comments, docId }) {
+export default function Action({ likes, userLikedPhoto, comments, docId, isUserLikedToggle, addNewComment, photo }) {
     const [likeCount, setLikeCount] = useState(likes.length);
     const [allComments, setAllComments] = useState(comments);
     const [isUserLiked, setIsUserLiked] = useState(userLikedPhoto);
 
-    // useEffect(() => {
-    //     if (docId) {
-    //         setLikeCount(likes.length);
-    //         setAllComments(comments);
-    //         setIsUserLiked(userLikedPhoto);
-    //     }
-    // }, [docId]);
+    useEffect(() => {
+        if (docId) {
+            setLikeCount(likes.length);
+            setAllComments(comments);
+            setIsUserLiked(userLikedPhoto);
+        }
+    }, [docId]);
+
+    console.log('photo', photo);
+    console.log('comments', comments);
 
     const {
         user: { uid: userId = '' },
@@ -24,6 +27,7 @@ export default function Action({ likes, userLikedPhoto, comments, docId }) {
 
     const handleLike = async () => {
         setIsUserLiked(!isUserLiked);
+        isUserLikedToggle(photo, userId);
         await firebase
             .firestore()
             .collection('photos')
@@ -31,7 +35,7 @@ export default function Action({ likes, userLikedPhoto, comments, docId }) {
             .update({
                 likes: isUserLiked ? FieldValue.arrayRemove(userId) : FieldValue.arrayUnion(userId),
             });
-        setLikeCount((likeCount) => (isUserLiked ? likeCount - 1 : likeCount + 1));
+        setLikeCount(likes.length);
     };
 
     return (
@@ -73,7 +77,13 @@ export default function Action({ likes, userLikedPhoto, comments, docId }) {
                     <p className="text-sm text-gray-dark">{allComments.length}</p>
                 </div>
             </div>
-            <Comments setAllComments={setAllComments} allComments={allComments} docId={docId} />
+            <Comments
+                setAllComments={setAllComments}
+                allComments={allComments}
+                docId={docId}
+                addNewComment={addNewComment}
+                photo={photo}
+            />
         </div>
     );
 }
@@ -83,4 +93,7 @@ Action.propTypes = {
     comments: PropTypes.array.isRequired,
     userLikedPhoto: PropTypes.bool.isRequired,
     docId: PropTypes.string.isRequired,
+    isUserLikedToggle: PropTypes.func.isRequired,
+    addNewComment: PropTypes.func.isRequired,
+    photo: PropTypes.object,
 };
