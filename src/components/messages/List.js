@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 
 export default function List({
     setShowMessage,
@@ -15,7 +16,8 @@ export default function List({
         setSelectedUsersPhoto(photo);
     };
     return (
-        <div className="flex mb-4" onClick={showMessageHandler}>
+        <div className="flex relative mb-4 cursor-pointer" onClick={showMessageHandler}>
+            <Link to={`/messages/${username}`} className="absolute top-0 right-0 left-0 bottom-0 z-90 sm:hidden" />
             <div className="flex w-12 h-12 mr-2">
                 <img src={photo} className="rounded-full w-full h-full object-cover" />
             </div>

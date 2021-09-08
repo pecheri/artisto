@@ -15,6 +15,7 @@ const Profile = lazy(() => import('./pages/Profile'));
 const ProfileEdit = lazy(() => import('./pages/ProfileEdit'));
 const Search = lazy(() => import('./pages/Search'));
 const Messages = lazy(() => import('./pages/Messages'));
+const MessagesUser = lazy(() => import('./pages/MessagesUser'));
 const UploadImage = lazy(() => import('./pages/UploadImage'));
 const NotFound = lazy(() => import('./pages/NotFound'));
 
@@ -39,7 +40,8 @@ function App() {
                         <Route path={ROUTES.PROFILE} component={Profile} />
                         <Route path={ROUTES.PROFILE_EDIT} component={ProfileEdit} />
                         <Route path={ROUTES.SEARCH} component={Search} />
-                        <Route path={ROUTES.MESSAGES} component={Messages} />
+                        <Route path={ROUTES.MESSAGES} component={Messages} exact />
+                        <Route path={ROUTES.MESSAGES_USER} component={MessagesUser} exact />
                         <Route path={ROUTES.UPLOAD_IMAGE} component={UploadImage} />
                         <Route component={NotFound} />
                     </Switch>
