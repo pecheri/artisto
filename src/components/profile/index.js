@@ -4,10 +4,12 @@ import ProfileHeader from './ProfileHeader';
 import Images from './Images';
 import { getProfilePhotosbyUserId } from '../../services/firebase';
 import useUser from '../../hooks/useUser';
+import Skeleton from 'react-loading-skeleton';
 
 export default function UserProfile({ profileUserInfo }) {
     const [photos, setPhotos] = useState(null);
     const [photoCounts, setPhotoCounts] = useState(0);
+    const [loading, setLoading] = useState(false);
     console.log('photos', photos);
 
     const {
@@ -19,8 +21,10 @@ export default function UserProfile({ profileUserInfo }) {
             const result = await getProfilePhotosbyUserId(userId, profileUserInfo.userId, profileUserInfo.username);
             setPhotos(result.sort((a, b) => b.dateCreated - a.dateCreated));
             setPhotoCounts(result.length);
+            setLoading(false);
         };
         if (profileUserInfo?.userId && userId) {
+            setLoading(true);
             getProfileUserPhotos();
         }
     }, [profileUserInfo?.userId, userId]);
@@ -54,6 +58,7 @@ export default function UserProfile({ profileUserInfo }) {
     return (
         <div className="max-w-screen-lg container mx-auto px-4">
             <ProfileHeader profileUserInfo={profileUserInfo} photos={photos} photoCounts={photoCounts} />
+            {/* {loading && <Skeleton count={1} width={300} height={300} />} */}
             {!photos ? null : photos.length > 0 ? (
                 <Images
                     profileUserInfo={profileUserInfo}
@@ -61,6 +66,7 @@ export default function UserProfile({ profileUserInfo }) {
                     photoCounts={photoCounts}
                     isUserLikedToggle={isUserLikedToggle}
                     addNewComment={addNewComment}
+                    loading={loading}
                 />
             ) : (
                 <div className="mt-8 border-t-2 border-gray-dark">

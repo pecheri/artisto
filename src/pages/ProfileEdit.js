@@ -52,7 +52,7 @@ export default function ProfileEdit() {
         <div>
             <Header />
             {upload && (
-                <div className="flex absolute top-0 left-0 w-screen h-screen bg-gray-dark opacity-70 z-90 items-center justify-center">
+                <div className="flex fixed top-0 left-0 w-screen h-screen bg-gray-dark opacity-70 z-90 items-center justify-center">
                     <p className="text-2xl text-gray-light bg-gradient-to-r from-blue-primary via-yellow-primary to-red-primary py-4 px-8 rounded animate-pulse">
                         Uploading...
                     </p>
