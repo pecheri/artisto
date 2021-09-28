@@ -24,17 +24,6 @@ export default function Images({ profileUserInfo, photos, photoCounts, isUserLik
                         />
                     ))
                 )}
-                {/* {photos.map((photo, index) => (
-                    <Image
-                        key={index}
-                        photo={photo}
-                        profileUserInfo={profileUserInfo}
-                        photos={photos}
-                        photoCounts={photoCounts}
-                        isUserLikedToggle={isUserLikedToggle}
-                        addNewComment={addNewComment}
-                    />
-                ))} */}
             </div>
         </div>
     );

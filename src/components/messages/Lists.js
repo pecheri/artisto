@@ -1,26 +1,65 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
+import { firebase, FieldValue } from '../../lib/firebase';
 import PropTypes from 'prop-types';
 import List from './List';
-import { messageList } from '../../lib/messages';
+// import { messageList } from '../../lib/messages';
+// import { getMessageList } from '../../services/firebase';
+import { getUserByUserId } from '../../services/firebase';
+import UserContext from '../../context/user';
+// import useUser from '../../hooks/useUser';
 
-export default function Lists({ setShowMessage, setSelectedUsersUsername, setSelectedUsersPhoto }) {
+export default function Lists({ setShowMessage, setSelectedUsersUsername, setSelectedUsersPhoto, setIsCreatingGroup }) {
     const [search, setSearch] = useState('');
-    const [searchResult, setSearchResult] = useState(messageList);
+    const [allGroupList, setAllGroupList] = useState();
+    const [searchResult, setSearchResult] = useState();
+    const [username, setUsername] = useState('');
+    const {
+        user: { uid: userId },
+    } = useContext(UserContext);
+
+    // useEffect(() => {
+    //     const getUsername = async () => {
+    //         const [result] = await getUserByUserId(userId);
+    //         setUsername(result.username);
+    //     };
+    //     if (userId) {
+    //         getUsername();
+    //     }
+    // }, [userId]);
 
     useEffect(() => {
-        if (!search) {
-            setSearchResult(messageList);
-        } else {
-            const result = messageList.filter((item) => item.username.includes(search.toLowerCase()));
-            setSearchResult(result);
-        }
-    }, [search]);
+        // if (username) {
+        const getAllGroupList = firebase
+            .firestore()
+            .collection('group')
+            .where('members', 'array-contains', userId)
+            .onSnapshot((querySnapshot) => {
+                const list = querySnapshot.docs.map((item) => ({
+                    ...item.data(),
+                }));
+                let memberWithoutMe;
+                const listPlusMemberUsername = list.map((item) => {
+                    item.members.forEach((member) => {
+                        if (member !== userId) {
+                            memberWithoutMe = member;
+                        }
+                    });
+                    return { ...item, memberWithoutMe };
+                });
+                setAllGroupList(listPlusMemberUsername);
+            });
+
+        return () => {
+            getAllGroupList();
+        };
+        // }
+    }, []);
 
     return (
         <div className="mt-24 text-gray-light w-screen sm:w-full sm:overflow-hidden relative h-5/6">
             <div className="flex justify-between mx-4 ">
                 <p>Messages</p>
-                <button>
+                <button onClick={() => setIsCreatingGroup(true)}>
                     <svg
                         xmlns="http://www.w3.org/2000/svg"
                         className="h-6 w-6"
@@ -46,20 +85,22 @@ export default function Lists({ setShowMessage, setSelectedUsersUsername, setSel
                 />
             </div>
             <div className="w-full px-4 pt-4 pb-4 absolute overflow-y-scroll h-5/6 mt-2">
-                {searchResult.length > 0 ? (
-                    searchResult.map((item, index) => (
-                        <List
-                            setShowMessage={setShowMessage}
-                            key={index}
-                            username={item.username}
-                            photo={item.photo}
-                            date={item.date}
-                            setSelectedUsersUsername={setSelectedUsersUsername}
-                            setSelectedUsersPhoto={setSelectedUsersPhoto}
-                        />
-                    ))
+                {allGroupList ? (
+                    allGroupList
+                        .sort((a, b) => b.recentMessage.sentAt - a.recentMessage.sentAt)
+                        .map((item, index) => (
+                            <List
+                                memberUserId={item.memberWithoutMe}
+                                setShowMessage={setShowMessage}
+                                key={index}
+                                date={item.recentMessage.sentAt}
+                                setSelectedUsersUsername={setSelectedUsersUsername}
+                                setSelectedUsersPhoto={setSelectedUsersPhoto}
+                                search={search}
+                            />
+                        ))
                 ) : (
-                    <p className="text-center">No Results</p>
+                    <p>Loading...</p>
                 )}
             </div>
         </div>
@@ -69,4 +110,5 @@ Lists.propTypes = {
     setShowMessage: PropTypes.func.isRequired,
     setSelectedUsersUsername: PropTypes.func.isRequired,
     setSelectedUsersPhoto: PropTypes.func.isRequired,
+    setIsCreatingGroup: PropTypes.func.isRequired,
 };

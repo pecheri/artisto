@@ -3,11 +3,14 @@ import Header from '../components/Header';
 import Lists from '../components/messages/Lists';
 import MessageHeader from '../components/messages/MessageHeader';
 import Message from '../components/messages/Message';
+import CreateGroup from './CreateGroup';
 
 export default function Messages() {
     const [showMessage, setShowMessage] = useState(false);
     const [selectedUsersUsername, setSelectedUsersUsername] = useState('');
     const [selectedUsersphoto, setSelectedUsersPhoto] = useState('');
+    const [isCreatingGroup, setIsCreatingGroup] = useState(false);
+    console.log('isCreatingGroup', isCreatingGroup);
 
     return (
         <div className="w-screen mx-auto flex h-screen max-w-screen-xl">
@@ -21,6 +24,7 @@ export default function Messages() {
                     setShowMessage={setShowMessage}
                     setSelectedUsersUsername={setSelectedUsersUsername}
                     setSelectedUsersPhoto={setSelectedUsersPhoto}
+                    setIsCreatingGroup={setIsCreatingGroup}
                 />
             </div>
             <div className={`${!showMessage && 'hidden'} sm:block w-full sm:relative sm:h-full`}>
@@ -32,6 +36,7 @@ export default function Messages() {
                 />
                 <Message photo={selectedUsersphoto} showMessage={showMessage} />
             </div>
+            {isCreatingGroup && <CreateGroup />}
         </div>
     );
 }

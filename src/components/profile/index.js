@@ -4,7 +4,6 @@ import ProfileHeader from './ProfileHeader';
 import Images from './Images';
 import { getProfilePhotosbyUserId } from '../../services/firebase';
 import useUser from '../../hooks/useUser';
-import Skeleton from 'react-loading-skeleton';
 
 export default function UserProfile({ profileUserInfo }) {
     const [photos, setPhotos] = useState(null);
@@ -58,7 +57,6 @@ export default function UserProfile({ profileUserInfo }) {
     return (
         <div className="max-w-screen-lg container mx-auto px-4">
             <ProfileHeader profileUserInfo={profileUserInfo} photos={photos} photoCounts={photoCounts} />
-            {/* {loading && <Skeleton count={1} width={300} height={300} />} */}
             {!photos ? null : photos.length > 0 ? (
                 <Images
                     profileUserInfo={profileUserInfo}
