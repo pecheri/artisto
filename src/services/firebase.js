@@ -232,3 +232,42 @@ export async function uploadNewPost(caption, imageFile, userId, setUpload) {
         alert(error.message);
     }
 }
+
+export async function getSearchedUsers(searchKeyword, userId) {
+    // if (searchKeyword) {
+    // get search results if searchKeyworkd is input
+    const result = await firebase
+        .firestore()
+        .collection('users')
+        .orderBy('username')
+        .startAt(searchKeyword)
+        .endAt(searchKeyword + '\uf8ff')
+        .get();
+    const users = result.docs
+        .map((item) => ({
+            ...item.data(),
+            docId: item.id,
+        }))
+        .filter((item) => item.userId !== userId);
+    return users;
+    // } else {
+    //     // show following users if searchKeyword is empty
+    //     const result = await firebase.firestore().collection('users').where('userId', '==', userId).get();
+    //     const [loginUser] = result.docs.map((item) => ({
+    //         ...item.data(),
+    //         docId: item.id,
+    //     }));
+    //     const users = getFollowingOrFollowersList(loginUser.following);
+    //     return users;
+    // }
+}
+
+export async function getFollowingByUserId(userId) {
+    const result = await firebase.firestore().collection('users').where('userId', '==', userId).get();
+    const [loginUser] = result.docs.map((item) => ({
+        ...item.data(),
+        docId: item.id,
+    }));
+    const users = getFollowingOrFollowersList(loginUser.following);
+    return users;
+}

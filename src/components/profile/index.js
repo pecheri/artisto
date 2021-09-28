@@ -9,7 +9,6 @@ export default function UserProfile({ profileUserInfo }) {
     const [photos, setPhotos] = useState(null);
     const [photoCounts, setPhotoCounts] = useState(0);
     const [loading, setLoading] = useState(false);
-    console.log('photos', photos);
 
     const {
         userInfo: { userId },

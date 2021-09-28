@@ -41,8 +41,6 @@ export default function List({
         minute: '2-digit',
     });
 
-    console.log(sentAt);
-
     if (memberInfo?.username) {
         if (memberInfo.username.includes(search.toLowerCase()) || !search) {
             return (

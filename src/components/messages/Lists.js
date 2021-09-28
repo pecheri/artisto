@@ -8,14 +8,17 @@ import { getUserByUserId } from '../../services/firebase';
 import UserContext from '../../context/user';
 // import useUser from '../../hooks/useUser';
 
-export default function Lists({ setShowMessage, setSelectedUsersUsername, setSelectedUsersPhoto, setIsCreatingGroup }) {
+export default function Lists({
+    setShowMessage,
+    setSelectedUsersUsername,
+    setSelectedUsersPhoto,
+    setIsCreatingGroup,
+    userId,
+}) {
     const [search, setSearch] = useState('');
     const [allGroupList, setAllGroupList] = useState();
     const [searchResult, setSearchResult] = useState();
     const [username, setUsername] = useState('');
-    const {
-        user: { uid: userId },
-    } = useContext(UserContext);
 
     // useEffect(() => {
     //     const getUsername = async () => {
@@ -111,4 +114,5 @@ Lists.propTypes = {
     setSelectedUsersUsername: PropTypes.func.isRequired,
     setSelectedUsersPhoto: PropTypes.func.isRequired,
     setIsCreatingGroup: PropTypes.func.isRequired,
+    userId: PropTypes.string.isRequired,
 };
